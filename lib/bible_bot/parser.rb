@@ -30,15 +30,17 @@ module BibleBot
       text.scan(Bible.new.scripture_re).each do |match|
         begin
           references << normalize_reference(*match)
-        rescue
-          next
+          #rescue
+          #next
         end
       end
       names = Bible.new.scripture_re.names
       names.delete("BookTitleSecond") #Cheap Hack to avoid having to 
-      return references.collect do |match|
-        Hash[names.zip(match)]
-      end
+      # return references.collect do |match|
+      #   Hash[names.zip(match)]
+      # end
+      
+      return references
     end
  
     def is_valid_reference(bookname, chapter, verse = nil, end_chapter = nil, end_verse = nil)
@@ -153,7 +155,7 @@ module BibleBot
       # Get a complete five value tuple scripture reference with full book name
       # from partial data
       book = get_book(bookname)
-      if !second_bookname.nil?
+      if !second_bookname.nil? && !second_bookname.strip == ""
         second_book = get_book(second_bookname)
         raise InvalidReferenceError if second_book != book
       end
@@ -199,7 +201,8 @@ module BibleBot
       end
 
       if verse.nil?
-        return [book.name, chapter, 1, chapter, book.chapters[chapter-1]]
+        # return [book.name, chapter, 1, chapter, book.chapters[chapter-1]]
+        return Reference.new( book: book, chapter_number: chapter, verse_number: 1, end_chapter_number: chapter, end_verse_number: book.chapters[chapter-1])
       end
       if end_verse.nil?
         if end_chapter && end_chapter != chapter
@@ -211,7 +214,8 @@ module BibleBot
       if end_chapter.nil?
         end_chapter = chapter
       end
-      return [book.name, chapter, verse, end_chapter, end_verse]
+      # return [book.name, chapter, verse, end_chapter, end_verse]
+      return Reference.new( book: book, chapter_number: chapter, verse_number: verse, end_chapter_number: end_chapter, end_verse_number: end_verse)
     end
   end
   
