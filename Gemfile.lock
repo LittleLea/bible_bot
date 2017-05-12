@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bible_verse (1.0.0.pre)
+    bible_bot (1.0.0.pre)
 
 GEM
   remote: https://rubygems.org/
@@ -25,7 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bible_verse!
+  bible_bot!
   rspec (~> 3.5.0)
 
 BUNDLED WITH

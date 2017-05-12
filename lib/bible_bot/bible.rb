@@ -1,4 +1,4 @@
-module BibleVerse
+module BibleBot
   class Bible
     
     @@books = [

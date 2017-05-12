@@ -1,4 +1,4 @@
-module BibleVerse
+module BibleBot
   class Book
     attr_accessor :id
     attr_accessor :name
