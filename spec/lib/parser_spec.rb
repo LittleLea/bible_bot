@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BibleBot::ScriptureParser do
+describe BibleBot::Parser do
 
   it "Parses scripture" do
     pending "Coming soon."
