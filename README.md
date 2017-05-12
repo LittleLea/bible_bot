@@ -4,8 +4,12 @@ Gem for parsing and working with bible verse references.
 
 ## Usage
 
-    $ gem install 'bible_bot'
+    # Gemfile
+    gem 'bible_bot', '~> 1.0.0.pre', git: 'https://github.com/Lightstock/bible_bot.git'
     
+    $ bundle install
+    
+    # Use it
     require 'bible_bot'
     p = BibleBot::Parser.new
     references = p.extract( "John 1:1 is the first but Rom 8:9-10 is another." )
