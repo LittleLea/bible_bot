@@ -1,7 +1,7 @@
-module BibleVerse
+module BibleBot
   
   #From forgeapps/scripture_parser v0.0.1
-  class ScriptureParser
+  class Parser
   
     def get_book(name)
       # Get a book from its name or None if not found

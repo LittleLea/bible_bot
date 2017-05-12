@@ -1,5 +1,5 @@
 #From forgeapps/scripture_parser v0.0.1
-module BibleVerse
+module BibleBot
   class ScriptureParser
     class InvalidReferenceError < StandardError
     end

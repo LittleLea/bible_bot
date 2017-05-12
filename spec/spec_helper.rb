@@ -4,9 +4,9 @@ require 'support/helpers'
 
 
 # Gem under test
-require 'bible_verse'
+require 'bible_bot'
 
-include BibleVerse
+include BibleBot
 include Helpers
 
 RSpec.configure do |config|

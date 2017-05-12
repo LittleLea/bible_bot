@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bible_verse/version'
+require 'bible_bot/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "bible_verse"
-  spec.version       = BibleVerse::VERSION
+  spec.name          = "bible_bot"
+  spec.version       = BibleBot::VERSION
   spec.authors       = ["Jeff McFadden"]
   spec.email         = ["jeff@littlelea.co"]
-  spec.summary       = %q{Bible Verse Parsing.}
-  spec.homepage      = "https://github.com/lightstock/bible_verse"
+  spec.summary       = %q{Bible Verse Parsing, etc.}
+  spec.homepage      = "https://github.com/lightstock/bible_bot"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

@@ -1,3 +1,3 @@
-# bible_verse
+# bible_bot
 
-Gem for parsing bible verse references
+Gem for parsing and working with bible verse references.
