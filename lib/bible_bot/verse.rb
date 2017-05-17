@@ -12,7 +12,7 @@ module BibleBot
     end
   
     def verse_id
-      "#{book.name.downcase.gsub(' ', '_')}-#{chapter_number}-#{verse_number}"
+      "#{book.name.downcase.gsub(' ', '_')}-#{chapter_number.to_s.rjust(3, '0')}-#{verse_number.to_s.rjust(3, '0')}"
     end
   
   end
