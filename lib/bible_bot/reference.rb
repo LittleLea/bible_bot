@@ -18,7 +18,9 @@ module BibleBot
         self.end_chapter_number = chapter_number
       end
       
-      if end_verse_number.nil?
+      if end_verse_number.nil? && (self.chapter_number != self.end_chapter_number)
+        self.end_verse_number = self.book.chapters[self.end_chapter_number - 1]
+      elsif end_verse_number.nil?
         self.end_verse_number = self.verse_number
       end
     end
@@ -53,6 +55,30 @@ module BibleBot
       "BibleBot::Reference — #{formatted}"
     end
   
+    def verses
+      verses = []
+      
+      (chapter_number..end_chapter_number).each do |c|
+        # end verse is last verse unless c == end_chapter_number, in which case it's end_verse_number        
+        if c == chapter_number
+          sv = verse_number
+        else
+          sv = 1
+        end
+        
+        if c == end_chapter_number
+          ev = end_verse_number
+        else
+          ev = book.chapters[c-1] # this is the number of verses in this chapter
+        end
+        
+        (sv..ev).each do |v|
+          verses.push( Verse.new( book: book, chapter_number: c, verse_number: v ) )
+        end
+      end
+      
+      verses
+    end
    
   end
 end
