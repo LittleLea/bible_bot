@@ -5,7 +5,7 @@ Gem for parsing and working with bible verse references.
 ## Usage
 
     # Gemfile
-    gem 'bible_bot', '~> 1.0.0.pre', git: 'https://github.com/Lightstock/bible_bot.git'
+    gem 'bible_bot', '~> 1.0.1', git: 'https://github.com/Lightstock/bible_bot.git'
     
     $ bundle install
     
