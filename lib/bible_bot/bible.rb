@@ -349,7 +349,7 @@ module BibleBot
         id: 50,
         name: "Philippians",
         abbreviation: "Phil",
-        regex: "Phil(?:ippians)?",
+        regex: "Phil(?!e)(?:ippians)?",
         chapters: [30, 30, 21, 23]
       ), 
       Book.new(
