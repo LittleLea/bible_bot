@@ -13,5 +13,16 @@ module BibleBot
       self.regex = regex
       self.chapters = chapters
     end
+    
+    def formatted_name
+      if name == 'Psalms'
+        return 'Psalm'
+      elsif name == 'Revelation of Jesus Christ'
+        return 'Revelation'
+      else
+        return name
+      end
+    end
+    
   end
 end
