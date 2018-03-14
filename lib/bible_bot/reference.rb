@@ -6,6 +6,21 @@ module BibleBot
     attr_accessor :verse_number
     attr_accessor :end_chapter_number
     attr_accessor :end_verse_number
+    
+    def self.from_verse_id(verse_id)
+      parts = verse_id.split( '-' )
+    
+      book_name      = parts[0].gsub( '_', ' ' )
+      chapter_number = parts[1].to_i
+      verse_number   = parts[2].to_i
+    
+      book = BibleBot::Bible.books.select{ |b| b.name.downcase == book_name }.first  
+    
+      raise BibleBot::InvalidVerseID if book.nil?
+    
+      return Reference.new( book: book, chapter_number: chapter_number, verse_number: verse_number )
+    end
+      
   
     def initialize( book: nil, chapter_number: nil, verse_number: nil, end_chapter_number: nil, end_verse_number: nil )
       self.book               = book

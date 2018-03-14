@@ -1,4 +1,8 @@
 module BibleBot
+
+  class InvalidVerseID < StandardError
+  end
+  
   class Verse
   
     attr_accessor :book
