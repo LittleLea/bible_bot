@@ -512,7 +512,7 @@ module BibleBot
         abbreviation: "3John",
         regex: "(?:(?:3|III)(?:\\s)?)John",
         testament: "New",
-        chapters: [14]
+        chapters: [15]
       ),
       Book.new(
         id: 65,
