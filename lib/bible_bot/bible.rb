@@ -524,7 +524,7 @@ module BibleBot
       ),
       Book.new(
         id: 66,
-        name: "Revelation of Jesus Christ",
+        name: "Revelation",
         abbreviation: "Rev",
         regex: "Rev(?:elation)?(?:\\sof Jesus Christ)?",
         testament: "New",
