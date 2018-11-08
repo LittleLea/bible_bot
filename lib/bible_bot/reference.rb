@@ -40,7 +40,7 @@ module BibleBot
       end
     end
 
-    def formatted(always_include_chapter = false)
+    def formatted(always_include_chapter: false)
       # if start and end chapters are the same
       if chapter_number == end_chapter_number || end_chapter_number.nil?
         if book.chapters.length == 1 && always_include_chapter == false # single chapter book
