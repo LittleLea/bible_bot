@@ -52,7 +52,7 @@ module BibleBot
           end
         else # multichapter book
           # If the start verse is one and the end verse is the last verse in the chapter
-          if verse_number == 1 && end_verse_number == book.chapters[chapter_number-1]
+          if full_chapter?
             return "#{book.formatted_name} #{chapter_number}"
           # If start and end verses are the same
           elsif verse_number == end_verse_number || end_verse_number.nil?
@@ -64,6 +64,10 @@ module BibleBot
       else # start and end chapters are different
         return "#{book.formatted_name} #{chapter_number}:#{verse_number}-#{end_chapter_number}:#{end_verse_number}"
       end
+    end
+
+    def full_chapter?
+      chapter_number == end_chapter_number && verse_number == 1 && end_verse_number == book.chapters[chapter_number-1]
     end
 
     def to_s
