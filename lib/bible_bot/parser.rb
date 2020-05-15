@@ -28,6 +28,11 @@ module BibleBot
       #Extract a list of tupled scripture references from a block of text
       references = []
       text.scan(Bible.new.scripture_re).each do |match|
+
+        # Skip results where bookname is nil
+        bookname = match[0]
+        next if bookname == "" || bookname.nil?
+
         begin
           references << normalize_reference(*match)
           #rescue
