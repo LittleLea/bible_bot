@@ -3,7 +3,7 @@ module BibleBot
   #From forgeapps/scripture_parser v0.0.1
   class Parser
     def extract(text)
-      #Extract a list of tupled scripture references from a block of text
+      #Extract an array of scripture references from a block of text
       references = []
       text.scan(Bible.new.scripture_re).each do |match|
 
