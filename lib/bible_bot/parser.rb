@@ -2,26 +2,18 @@ module BibleBot
 
   #From forgeapps/scripture_parser v0.0.1
   class Parser
-    def extract(text)
-      #Extract an array of scripture references from a block of text
+
+    # Extract an array of scripture references from a block of text
+    def extract(text, ignore_errors: false)
       references = []
       text.scan(Bible.new.scripture_re).each do |match|
-
-        # Skip results where bookname is nil
-        bookname = match[0]
-        next if bookname == "" || bookname.nil?
-
         begin
           references << normalize_reference(*match)
-          #rescue
-          #next
+        rescue BibleBotError => e
+          raise e unless ignore_errors
+          next
         end
       end
-      names = Bible.new.scripture_re.names
-      names.delete("BookTitleSecond") #Cheap Hack to avoid having to
-      # return references.collect do |match|
-      #   Hash[names.zip(match)]
-      # end
 
       return references
     end
@@ -140,7 +132,7 @@ module BibleBot
       book = Book.find_by_name(bookname)
       if !second_bookname.nil? && !second_bookname.strip == ""
         second_book = Book.find_by_name(second_bookname)
-        raise BibleBot::Errors::InvalidReferenceError if second_book != book
+        raise BibleBot::InvalidReferenceError if second_book != book
       end
 
       # SPECIAL CASE FOR BOOKS WITH ONE CHAPTER:
@@ -180,7 +172,7 @@ module BibleBot
            || (end_chapter && end_verse > book.chapters[end_chapter-1]) \
            || (chapter == end_chapter and end_verse < verse) ) ) )
 
-        raise BibleBot::Errors::InvalidReferenceError
+        raise BibleBot::InvalidReferenceError
       end
 
       if verse.nil?

@@ -96,7 +96,15 @@ describe BibleBot::Parser do
 
     invalid_references.each do |ref|
       it "raises error when parsing #{ref}" do
-        expect{ parser.extract(ref) }.to raise_error(BibleBot::Errors::InvalidReferenceError)
+        expect{ parser.extract(ref) }.to raise_error(BibleBot::InvalidReferenceError)
+      end
+    end
+
+    context "ignore_errors=true" do
+      let(:ref) { "Genesis 51:4 and Psalm 1:1-4 and Rom 1:99 are not all valid references" }
+      it "ignores errors" do
+        expect{ parser.extract(ref) }.to raise_error(BibleBot::InvalidReferenceError)
+        expect( parser.extract(ref, ignore_errors: true).map(&:formatted) ).to eq(['Psalm 1:1-4'])
       end
     end
   end
