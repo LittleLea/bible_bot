@@ -2,28 +2,6 @@ module BibleBot
 
   #From forgeapps/scripture_parser v0.0.1
   class Parser
-
-    def get_book(name)
-      # Get a book from its name or None if not found
-
-      Bible.books.each do |book|
-        if name.match(Regexp.new('\b'+book.regex, Regexp::IGNORECASE))
-          return book
-        end
-      end
-      return nil
-    end
-
-    def get_book_by_id(id)
-      # Get a book from its id or None if not found
-      Bible.books.each do |book|
-        if id == book.id
-          return book
-        end
-      end
-      return nil
-    end
-
     def extract(text)
       #Extract a list of tupled scripture references from a block of text
       references = []
@@ -65,7 +43,7 @@ module BibleBot
 
       # if start and end chapters are the same
       if normalized[1] == normalized[3]
-        book = get_book(normalized[0])
+        book = Book.find_by_name(normalized[0])
 
         if book.chapters.length == 1 # single chapter book
           # If start and end verses are the same
@@ -92,7 +70,7 @@ module BibleBot
 
     def reference_range_to_verse_range(bookname, chapter, verse = nil, end_chapter = nil, end_verse = nil)
       normalized = normalize_reference(bookname, chapter, verse, nil, end_chapter, end_verse)
-      book = get_book(normalized[0])
+      book = Book.find_by_name(normalized[0])
 
       if chapter == 1
         verse_count_before_starting_chapter = 0
@@ -114,7 +92,7 @@ module BibleBot
 
     def verse_range_to_reference_range(bookname, verse_range_start, verse_range_end = nil)
       #s.verse_range_to_reference_range("Genesis", 32, 51)
-      book = get_book(bookname)
+      book = Book.find_by_name(bookname)
 
       start_chapter = 1
       start_verse = 1
@@ -159,9 +137,9 @@ module BibleBot
     def normalize_reference(bookname, chapter, verse = nil, second_bookname = nil, end_chapter = nil, end_verse = nil)
       # Get a complete five value tuple scripture reference with full book name
       # from partial data
-      book = get_book(bookname)
+      book = Book.find_by_name(bookname)
       if !second_bookname.nil? && !second_bookname.strip == ""
-        second_book = get_book(second_bookname)
+        second_book = Book.find_by_name(second_bookname)
         raise InvalidReferenceError if second_book != book
       end
 

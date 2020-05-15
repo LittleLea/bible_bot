@@ -26,5 +26,12 @@ module BibleBot
       end
     end
 
+    def self.find_by_name(name)
+      Bible.books.find { |book| name.match(Regexp.new('\b'+book.regex, Regexp::IGNORECASE)) }
+    end
+
+    def self.find_by_id(id)
+      Bible.books.find { |book| book.id == id }
+    end
   end
 end
