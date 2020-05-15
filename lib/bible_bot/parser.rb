@@ -140,7 +140,7 @@ module BibleBot
       book = Book.find_by_name(bookname)
       if !second_bookname.nil? && !second_bookname.strip == ""
         second_book = Book.find_by_name(second_bookname)
-        raise InvalidReferenceError if second_book != book
+        raise BibleBot::Errors::InvalidReferenceError if second_book != book
       end
 
       # SPECIAL CASE FOR BOOKS WITH ONE CHAPTER:
@@ -180,7 +180,7 @@ module BibleBot
            || (end_chapter && end_verse > book.chapters[end_chapter-1]) \
            || (chapter == end_chapter and end_verse < verse) ) ) )
 
-        raise InvalidReferenceError
+        raise BibleBot::Errors::InvalidReferenceError
       end
 
       if verse.nil?
