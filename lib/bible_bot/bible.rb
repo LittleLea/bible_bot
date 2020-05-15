@@ -545,7 +545,9 @@ module BibleBot
 
       # compiled scripture reference regular expression
       @@scripture_re = Regexp.new(
-          sprintf('\b(?<BookTitle>%s)[\s\.]*' +
+          sprintf('\b' +
+           '(?<BookTitle>(?:%s))' +
+           '[\s\.]*' +
            '(?<ChapterNumber>\d{1,3})' +
            '(?:\s*[:\.]\s*(?<VerseNumber>\d{1,3}))?' +
            '(?:\s*-\s*' +
@@ -570,11 +572,7 @@ module BibleBot
 
     def get_book_re_string
       # Get a regular expression string that will match any book of the Bible
-      r=''
-      Bible.books.each do |b|
-        r += sprintf('%s|', b.regex)
-      end
-      return r
+      Bible.books.map(&:regex).join('|')
     end
   end
 end

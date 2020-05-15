@@ -7,7 +7,7 @@ module BibleBot
       # Get a book from its name or None if not found
 
       Bible.books.each do |book|
-        if name.match(Regexp.new(book.regex, Regexp::IGNORECASE))
+        if name.match(Regexp.new('\b'+book.regex, Regexp::IGNORECASE))
           return book
         end
       end
