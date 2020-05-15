@@ -5,6 +5,9 @@ module BibleBot
   class InvalidReferenceError < BibleBotError
   end
 
+  class InvalidVerseID < BibleBotError
+  end
+
   class ScriptureError < BibleBotError
   end
 end
