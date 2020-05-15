@@ -11,6 +11,8 @@ describe BibleBot::Parser do
 
     expect( @p.extract( "John 1:1 is the first first but Romans 8:9-10 is another." ).length ).to eq 2
         
+
+    expect( @p.extract( "When Fiery Trials Come Genesis 35:16-29" ).length ).to eq 1
   end
   
   abbreviation_tests_cases = [
