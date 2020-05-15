@@ -41,33 +41,47 @@ module BibleBot
     end
 
     def formatted(always_include_chapter: false)
-      # if start and end chapters are the same
-      if chapter_number == end_chapter_number || end_chapter_number.nil?
-        if book.chapters.length == 1 && always_include_chapter == false # single chapter book
-          # If start and end verses are the same
-          if verse_number == end_verse_number
+      if same_start_and_end_chapter?
+        if single_chapter_book? && !always_include_chapter
+          if same_start_and_end_verse?
             return "#{book.formatted_name} #{verse_number}"
           else
             return "#{book.formatted_name} #{verse_number}-#{end_verse_number}"
           end
-        else # multichapter book
-          # If the start verse is one and the end verse is the last verse in the chapter
-          if full_chapter?
+        else
+          if full_chapters?
             return "#{book.formatted_name} #{chapter_number}"
-          # If start and end verses are the same
-          elsif verse_number == end_verse_number || end_verse_number.nil?
+          elsif same_start_and_end_verse?
             return "#{book.formatted_name} #{chapter_number}:#{verse_number}"
           else
             return "#{book.formatted_name} #{chapter_number}:#{verse_number}-#{end_verse_number}"
           end
         end
       else # start and end chapters are different
-        return "#{book.formatted_name} #{chapter_number}:#{verse_number}-#{end_chapter_number}:#{end_verse_number}"
+        if full_chapters?
+          return "#{book.formatted_name} #{chapter_number}-#{end_chapter_number}"
+        else
+          return "#{book.formatted_name} #{chapter_number}:#{verse_number}-#{end_chapter_number}:#{end_verse_number}"
+        end
       end
     end
 
-    def full_chapter?
-      chapter_number == end_chapter_number && verse_number == 1 && end_verse_number == book.chapters[chapter_number-1]
+    def same_start_and_end_chapter?
+      chapter_number == end_chapter_number || end_chapter_number.nil?
+    end
+
+    def same_start_and_end_verse?
+      verse_number == end_verse_number || end_verse_number.nil?
+    end
+
+    # Single chapter book like Jude
+    def single_chapter_book?
+      book.chapters.length == 1
+    end
+
+    # One or multiple full chapters
+    def full_chapters?
+      verse_number == 1 && end_verse_number == book.chapters[(end_chapter_number || chapter_number)-1]
     end
 
     def to_s
