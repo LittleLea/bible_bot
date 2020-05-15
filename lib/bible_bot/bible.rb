@@ -6,7 +6,7 @@ module BibleBot
         id: 1,
         name: "Genesis",
         abbreviation: "Gen",
-        regex: "^(?:Ge|Gen)(?:esis)?",
+        regex: "(?:Ge|Gen)(?:esis)?",
         testament: "Old",
         chapters: [31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26]
       ),
@@ -545,7 +545,9 @@ module BibleBot
 
       # compiled scripture reference regular expression
       @@scripture_re = Regexp.new(
-          sprintf('\b(?<BookTitle>%s)[\s\.]*' +
+          sprintf('\b' +
+           '(?<BookTitle>(?:%s))' +
+           '[\s\.]*' +
            '(?<ChapterNumber>\d{1,3})' +
            '(?:\s*[:\.]\s*(?<VerseNumber>\d{1,3}))?' +
            '(?:\s*-\s*' +
@@ -570,11 +572,7 @@ module BibleBot
 
     def get_book_re_string
       # Get a regular expression string that will match any book of the Bible
-      r=''
-      Bible.books.each do |b|
-        r += sprintf('%s|', b.regex)
-      end
-      return r
+      Bible.books.map(&:regex).join('|')
     end
   end
 end
