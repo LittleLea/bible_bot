@@ -5,6 +5,7 @@ describe BibleBot::Parser do
   let(:parser) { BibleBot::Parser.new }
 
   test_cases = [
+    {ref: "Matthew 1:1 - Mark 4:2", expected: ["Matthew 1:1-Mark 4:2"]},
     {ref: "John 1:1", expected: ["John 1:1"]},
     {ref: "John 1:1 is the first first but Romans 8:9-10 is another.", expected: ["John 1:1", "Romans 8:9-10"]},
     {ref: "When Fiery Trials Come Genesis 35:16-29 Part 1", expected: ["Genesis 35:16-29"]},
@@ -14,6 +15,9 @@ describe BibleBot::Parser do
     {ref: "Rm 1:8", expected: ["Romans 1:8"]},
     {ref: "Ge 1:1", expected: ["Genesis 1:1"]},
     {ref: "Gen 1:1", expected: ["Genesis 1:1"]},
+    {ref: "Genesis", expected: []},
+    {ref: "Genesis 5", expected: ["Genesis 5"]},
+    {ref: "Ex", expected: []},
     {ref: "something 1 Genesis 1:1", expected: ["Genesis 1:1"]},
     {ref: "something 1 Exodus 1:1", expected: ["Exodus 1:1"]},
     {ref: "something 1 Leviticus 1:1", expected: ["Leviticus 1:1"]},
@@ -79,6 +83,7 @@ describe BibleBot::Parser do
     {ref: "something 1 2 John 1:1", expected: ["2 John 1"]},
     {ref: "something 1 3 John 1:1", expected: ["3 John 1"]},
     {ref: "something 1 Jude 1:1", expected: ["Jude 1"]},
+    {ref: "something 1 Jude 5", expected: ["Jude 5"]},
     {ref: "something 1 Revelation 1:1", expected: ["Revelation 1:1"]},
   ]
 
@@ -90,20 +95,23 @@ describe BibleBot::Parser do
 
   describe "invalid references" do
     invalid_references = [
-      "Genesis 51:4",
-      "Rom 1:99",
+      ["Genesis 51:4", BibleBot::InvalidVerseError],
+      ["Rom 1:99", BibleBot::InvalidVerseError],
+      ["Rom 0:1", BibleBot::InvalidVerseError],
+      ["Rom 1:0", BibleBot::InvalidVerseError],
+      ["Romans 5:2-4:11", BibleBot::InvalidReferenceError],
     ]
 
-    invalid_references.each do |ref|
+    invalid_references.each do |ref, expected_error|
       it "raises error when parsing #{ref}" do
-        expect{ parser.extract(ref) }.to raise_error(BibleBot::InvalidReferenceError)
+        expect{ parser.extract(ref) }.to raise_error(expected_error)
       end
     end
 
     context "ignore_errors=true" do
       let(:ref) { "Genesis 51:4 and Psalm 1:1-4 and Rom 1:99 are not all valid references" }
       it "ignores errors" do
-        expect{ parser.extract(ref) }.to raise_error(BibleBot::InvalidReferenceError)
+        expect{ parser.extract(ref) }.to raise_error(BibleBot::InvalidVerseError)
         expect( parser.extract(ref, ignore_errors: true).map(&:formatted) ).to eq(['Psalm 1:1-4'])
       end
     end

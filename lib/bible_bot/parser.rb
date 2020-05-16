@@ -1,14 +1,12 @@
 module BibleBot
-
-  #From forgeapps/scripture_parser v0.0.1
   class Parser
 
     # Extract an array of scripture references from a block of text
     def extract(text, ignore_errors: false)
       references = []
-      text.scan(Bible.new.scripture_re).each do |match|
+      regex_matches(text).each do |match|
         begin
-          references << normalize_reference(*match)
+          references << normalize_reference(match)
         rescue BibleBotError => e
           raise e unless ignore_errors
           next
@@ -126,72 +124,50 @@ module BibleBot
       return normalize_reference(bookname, start_chapter, start_verse, nil, end_chapter, end_verse)
     end
 
-    def normalize_reference(bookname, chapter, verse = nil, second_bookname = nil, end_chapter = nil, end_verse = nil)
-      # Get a complete five value tuple scripture reference with full book name
-      # from partial data
-      book = Book.find_by_name(bookname)
-      if !second_bookname.nil? && !second_bookname.strip == ""
-        second_book = Book.find_by_name(second_bookname)
-        raise BibleBot::InvalidReferenceError if second_book != book
-      end
+    def normalize_reference(match)
+      start_book = Book.find_by_name(match[:BookTitle])
 
       # SPECIAL CASE FOR BOOKS WITH ONE CHAPTER:
       # If there is only one chapter in this book, set the chapter to one and
       # treat the incoming chapter argument as though it were the verse.
       # This normalizes references such as:
       # Jude 2 and Jude 2-4
-      if book.chapters.length == 1
-        if verse.nil? && end_chapter.nil?
-          verse = chapter
-          chapter = 1
-        end
+      if start_book.single_chapter?
+        start_chapter = 1
+        start_verse = (match[:VerseNumber] || match[:ChapterNumber])&.to_i
       else
-        # This is not a single chapter book.
-        # If a start verse was NOT provided, but an end_verse was- we have a
-        # reference such as John 3-4 which we want to parse as John 3:1 - John 4:54
-        if verse.nil? && end_verse
-          verse = 1
-          end_chapter = end_verse
-          end_verse = book.chapters[end_chapter.to_i - 1]
-        end
+        start_chapter = match[:ChapterNumber]&.to_i
+        start_verse = match[:VerseNumber]&.to_i
       end
 
-      # Convert to integers or leave as Nil
-      chapter = chapter ? chapter.to_i : nil
-      verse =  verse ? verse.to_i : nil
-      end_chapter = end_chapter ? end_chapter.to_i : chapter
-      end_verse = end_verse ? end_verse.to_i : nil
-
-      if (book.nil? \
-         || (chapter.nil? || chapter < 1 || chapter > book.chapters.length) \
-         || (verse && (verse < 1 or verse > book.chapters[chapter-1])) \
-         || (end_chapter \
-           && (end_chapter < 1 || end_chapter < chapter ||  end_chapter > book.chapters.length)) \
-         || (end_verse \
-           && (end_verse < 1 \
-           || (end_chapter && end_verse > book.chapters[end_chapter-1]) \
-           || (chapter == end_chapter and end_verse < verse) ) ) )
-
-        raise BibleBot::InvalidReferenceError
+      end_book = Book.find_by_name(match[:BookTitleSecond]) || start_book
+      if end_book.single_chapter?
+        end_chapter = 1
+        end_verse = (match[:EndVerseNumber] || match[:EndChapterNumber] || start_verse)&.to_i
+      else
+        end_chapter = (match[:EndChapterNumber] || start_chapter)&.to_i
+        end_verse = (match[:EndVerseNumber] || start_verse)&.to_i
       end
 
-      if verse.nil?
-        # return [book.name, chapter, 1, chapter, book.chapters[chapter-1]]
-        return Reference.new( book: book, chapter_number: chapter, verse_number: 1, end_chapter_number: chapter, end_verse_number: book.chapters[chapter-1])
-      end
-      if end_verse.nil?
-        if end_chapter && end_chapter != chapter
-          end_verse = book.chapters[end_chapter-1]
-        else
-          end_verse = verse
-        end
-      end
-      if end_chapter.nil?
-        end_chapter = chapter
-      end
-      # return [book.name, chapter, verse, end_chapter, end_verse]
-      return Reference.new( book: book, chapter_number: chapter, verse_number: verse, end_chapter_number: end_chapter, end_verse_number: end_verse)
+      # Support references with or without verse or chapters.
+      # Ex:
+      #   "Genesis 1" should match the whole chapter
+      #   "Genesis" should match the whole book
+      start_chapter ||= 1
+      start_verse ||= 1
+      end_chapter ||= end_book.chapters.length
+      end_verse ||= end_book.chapters[end_chapter - 1]
+
+      Reference.new(
+        start_verse: Verse.new(book: start_book, chapter_number: start_chapter, verse_number: start_verse),
+        end_verse: Verse.new(book: end_book, chapter_number: end_chapter, verse_number: end_verse),
+      )
+    end
+
+    private
+
+    def regex_matches(text)
+      Array.new.tap { |matches| text.scan(Bible.new.scripture_re){ matches << $~ } }
     end
   end
-
 end
