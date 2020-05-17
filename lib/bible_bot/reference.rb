@@ -18,7 +18,7 @@ module BibleBot
       @start_verse = start_verse
       @end_verse   = end_verse
 
-      raise InvalidReferenceError unless valid?
+      raise InvalidReferenceError.new "Reference is not vaild: #{inspect}" unless valid?
     end
 
     def valid?
@@ -85,6 +85,13 @@ module BibleBot
       end
 
       @verses
+    end
+
+    def inspect
+      {
+        start_verse: start_verse&.formatted,
+        end_verse: end_verse&.formatted,
+      }
     end
   end
 end

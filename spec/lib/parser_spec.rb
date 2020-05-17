@@ -6,6 +6,7 @@ describe BibleBot::Parser do
 
   test_cases = [
     {ref: "Matthew 1:1 - Mark 4:2", expected: ["Matthew 1:1-Mark 4:2"]},
+    {ref: "Matthew 2 - Mark 4", expected: ["Matthew 2-Mark 4"]},
     {ref: "John 1:1", expected: ["John 1:1"]},
     {ref: "John 1:1 is the first first but Romans 8:9-10 is another.", expected: ["John 1:1", "Romans 8:9-10"]},
     {ref: "When Fiery Trials Come Genesis 35:16-29 Part 1", expected: ["Genesis 35:16-29"]},
@@ -17,6 +18,8 @@ describe BibleBot::Parser do
     {ref: "Gen 1:1", expected: ["Genesis 1:1"]},
     {ref: "Genesis", expected: []},
     {ref: "Genesis 5", expected: ["Genesis 5"]},
+    {ref: "Genesis 5-10", expected: ["Genesis 5-10"]},
+    {ref: "Genesis 1:1 - Exod 4", expected: ["Genesis 1-Exodus 4"]},
     {ref: "Ex", expected: []},
     {ref: "something 1 Genesis 1:1", expected: ["Genesis 1:1"]},
     {ref: "something 1 Exodus 1:1", expected: ["Exodus 1:1"]},
@@ -109,6 +112,7 @@ describe BibleBot::Parser do
     end
 
     context "ignore_errors=true" do
+      # TODO: Look into why it is matching the Genesis ref twice
       let(:ref) { "Genesis 51:4 and Psalm 1:1-4 and Rom 1:99 are not all valid references" }
       it "ignores errors" do
         expect{ parser.extract(ref) }.to raise_error(BibleBot::InvalidVerseError)

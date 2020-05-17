@@ -42,7 +42,7 @@ module BibleBot
       @chapter_number = chapter_number
       @verse_number = verse_number
 
-      raise InvalidVerseError unless valid?
+      raise InvalidVerseError.new "Verse is not valid: #{inspect}" unless valid?
     end
 
     # Returns an Integer in the from of
@@ -98,6 +98,14 @@ module BibleBot
 
     def last_chapter_in_book?
       chapter_number == book.chapters.length
+    end
+
+    def inspect
+      {
+        book: book&.name,
+        chapter_number: chapter_number,
+        verse_number: verse_number
+      }
     end
 
     private

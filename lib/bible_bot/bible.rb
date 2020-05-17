@@ -546,15 +546,16 @@ module BibleBot
       # compiled scripture reference regular expression
       @@scripture_re = Regexp.new(
           sprintf('\b' +
-           '(?<BookTitle>(?:%s))' +
+           '(?<BookTitle>%s)' +
            '[\s\.]*' +
            '(?<ChapterNumber>\d{1,3})' +
-           '(?:\s*[:\.]\s*(?<VerseNumber>\d{1,3}))?' +
+           '(?:\s*[:\.]\s*' +
+           '(?<VerseNumber>\d{1,3}))?' +
            '(?:\s*-\s*' +
-           '(?<BookTitleSecond>%s)?[\s\.]*' +
-           '(?<EndChapterNumber>\d{1,3}(?=\s*[:\.]\s*))?' +
-           '(?:\s*[:\.]\s*)?' +
-           '(?<EndVerseNumber>\d{1,3})?' +
+             '(?<BookTitleSecond>%s)?[\s\.]*' +
+             '(?<EndChapterNumber>\d{1,3})?' +
+             '(?:\s*[:\.]\s*)?' +
+             '(?<EndVerseNumber>\d{1,3})?' +
            ')?', @@book_re_string, @@book_re_string), Regexp::IGNORECASE)
     end
 
