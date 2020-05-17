@@ -14,6 +14,20 @@ module BibleBot
       )
     end
 
+    # Parse text into an array of scripture References
+    #
+    # @param text [String] ex: "John 1:1 is the first first but Romans 8:9-10 is another."
+    # @param ignore_errors [Bool] default: false
+    #     By default, raises the following errors
+    #       * InvalidVerseError - If a matching verse is not valid
+    #       * InvalidReferenceError - If verses are valid but reference is not
+    # @return [Array<Reference>]
+    def self.parse(text, ignore_errors: false)
+      ReferenceMatch.scan(text).map do |ref_match|
+        ref_match.reference(nil_on_error: ignore_errors)
+      end.compact
+    end
+
     def initialize(start_verse:, end_verse: nil)
       @start_verse = start_verse
       @end_verse   = end_verse

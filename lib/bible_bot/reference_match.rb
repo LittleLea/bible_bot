@@ -1,5 +1,14 @@
-class MatchToReference
+# Wraps the regular expression Match from a scripture reference.
+class ReferenceMatch
   attr_reader :match, :b1, :c1, :v1, :b2, :c2, :v2
+
+  # Returns an array of
+  def self.scan(text)
+    scripture_reg = Bible.new.scripture_re
+    Array.new.tap do |matches|
+      text.scan(scripture_reg){ matches << self.new($~) }
+    end
+  end
 
   def initialize(match)
     @match = match
@@ -12,11 +21,14 @@ class MatchToReference
     @v2 = match[:EndVerseNumber]
   end
 
-  def reference
+  def reference(nil_on_error: false)
     Reference.new(
       start_verse: Verse.new(book: start_book, chapter_number: start_chapter.to_i, verse_number: start_verse.to_i),
       end_verse: Verse.new(book: end_book, chapter_number: end_chapter.to_i, verse_number: end_verse.to_i),
     )
+  rescue BibleBotError => e
+    raise e unless nil_on_error
+    nil
   end
 
   def start_book
