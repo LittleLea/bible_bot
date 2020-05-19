@@ -2,6 +2,7 @@ module BibleBot
   # Defines Books and Regular Expressions used for parsing and other logic in this gem.
   class Bible
 
+    # Using this list to inform some of the Abbreviation decisions: https://www.logos.com/bible-book-abbreviations
     @@books = [
       Book.new(
         id: 1,
@@ -15,7 +16,7 @@ module BibleBot
         id: 2,
         name: "Exodus",
         abbreviation: "Exod",
-        regex: "Exod(?:us)?",
+        regex: "Ex(?:odus|od)?",
         testament: "Old",
         chapters: [22, 25, 22, 31, 23, 30, 25, 32, 35, 29, 10, 51, 22, 31, 27, 36, 16, 27, 25, 26, 36, 31, 33, 18, 40, 37, 21, 43, 46, 38, 18, 35, 23, 35, 35, 38, 29, 31, 43, 38]
       ),
@@ -103,7 +104,7 @@ module BibleBot
         id: 13,
         name: "1 Chronicles",
         abbreviation: "1Chr",
-        regex: "(?:1|I)(?:\\s)?Chr(?:o)?(?:nicles)?",
+        regex: "(?:1|I)(?:\\s)?Chr(?:on)?(?:icles)?",
         testament: "Old",
         chapters: [54, 55, 24, 43, 26, 81, 40, 40, 44, 14, 47, 40, 14, 17, 29, 43, 27, 17, 19, 8, 30, 19, 32, 31, 31, 32, 34, 21, 30]
       ),
@@ -111,7 +112,7 @@ module BibleBot
         id: 14,
         name: "2 Chronicles",
         abbreviation: "2Chr",
-        regex: "(?:2|II)(?:\\s)?Chr(?:o)?(?:nicles)?",
+        regex: "(?:2|II)(?:\\s)?Chr(?:on)?(?:icles)?",
         testament: "Old",
         chapters: [17, 18, 17, 22, 14, 42, 22, 18, 31, 19, 23, 16, 22, 15, 19, 14, 19, 34, 11, 37, 20, 12, 21, 27, 28, 23, 9, 27, 36, 27, 21, 33, 25, 33, 27, 23]
       ),
@@ -175,7 +176,7 @@ module BibleBot
         id: 22,
         name: "Song of Solomon",
         abbreviation: "Song",
-        regex: "Song(?: of Solomon)?",
+        regex: "Song(?: of )?(?:Solomon|Songs)?",
         testament: "Old",
         chapters: [17, 17, 11, 16, 16, 13, 13, 14]
       ),
@@ -319,7 +320,7 @@ module BibleBot
         id: 40,
         name: "Matthew",
         abbreviation: "Matt",
-        regex: "M(?:at)t(?:hew)?",
+        regex: "M(?:at)?t(?:hew)?",
         testament: "New",
         chapters: [25, 23, 17, 25, 48, 34, 29, 34, 38, 42, 30, 50, 58, 36, 39, 28, 27, 35, 30, 34, 46, 46, 39, 51, 46, 75, 66, 20]
       ),
@@ -454,8 +455,8 @@ module BibleBot
       Book.new(
         id: 57,
         name: "Philemon",
-        abbreviation: "Phlm",
-        regex: "Phile(?:mon)?",
+        abbreviation: "Philem",
+        regex: "Philem(?:on)?",
         testament: "New",
         chapters: [25]
       ),
@@ -495,7 +496,7 @@ module BibleBot
         id: 62,
         name: "1 John",
         abbreviation: "1John",
-        regex: "(?:(?:1|I)(?:\\s)?)John",
+        regex: "(?:(?:1|I)(?:\\s)?)(?:John|Jn)",
         testament: "New",
         chapters: [10, 29, 24, 21, 21]
       ),
@@ -503,7 +504,7 @@ module BibleBot
         id: 63,
         name: "2 John",
         abbreviation: "2John",
-        regex: "(?:(?:2|II)(?:\\s)?)John",
+        regex: "(?:(?:2|II)(?:\\s)?)(?:John|Jn)",
         testament: "New",
         chapters: [13]
       ),
@@ -511,7 +512,7 @@ module BibleBot
         id: 64,
         name: "3 John",
         abbreviation: "3John",
-        regex: "(?:(?:3|III)(?:\\s)?)John",
+        regex: "(?:(?:3|III)(?:\\s)?)(?:John|Jn)",
         testament: "New",
         chapters: [15]
       ),
