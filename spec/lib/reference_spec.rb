@@ -265,4 +265,21 @@ describe BibleBot::Reference do
     end
   end
 
+  describe "self.from_verse_ids" do
+    context "using Integer verse IDs" do
+      let(:reference) { Reference.from_verse_ids(1_001_001, 1_005_002) }
+
+      it "Successfully initializes Reference" do
+        expect(reference.formatted).to eq("Genesis 1:1-5:2")
+      end
+    end
+
+    context "using deprecated String verse IDs" do
+      let(:reference) { Reference.from_verse_ids("genesis-001-001", "genesis-005-002") }
+
+      it "Successfully initializes Reference" do
+        expect(reference.formatted).to eq("Genesis 1:1-5:2")
+      end
+    end
+  end
 end

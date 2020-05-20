@@ -16,7 +16,7 @@ module BibleBot
     # @example
     #   Verse.from_id(19_105_001) #=> <Verse book="Psalms" chapter_number=105 verse_number=1>
     def self.from_id(id)
-      return deprecated_from_verse_id(id) if id.is_a?(String)
+      return from_string_id(id) if id.is_a?(String)
       return nil if id.nil?
       raise BibleBot::InvalidVerseError unless id.is_a?(Integer)
 
@@ -56,7 +56,7 @@ module BibleBot
 
     # @deprecated Use {id} instead
     # @return [String] ex: "psalms-023-001"
-    def verse_id
+    def string_id
       "#{book.name.downcase.gsub(' ', '_')}-#{chapter_number.to_s.rjust(3, '0')}-#{verse_number.to_s.rjust(3, '0')}"
     end
 
@@ -138,17 +138,14 @@ module BibleBot
     # @deprecated Use {from_id} instead.
     # @param verse_id [String] ex: "genesis-001-001"
     # @return [Verse] ex: <Verse book="Genesis" chapter_number=1 verse_number=1>
-    def self.deprecated_from_verse_id(verse_id)
-      parts = verse_id.split( '-' )
+    def self.from_string_id(string_id)
+      parts = string_id.split( '-' )
 
       book_name      = parts[0].gsub( '_', ' ' )
       chapter_number = parts[1].to_i
       verse_number   = parts[2].to_i
 
       book = BibleBot::Bible.books.select{ |b| b.name.downcase == book_name }.first
-
-      # This Error is now deprecated, use InvalidVerseError instead
-      raise BibleBot::InvalidVerseID if book.nil?
 
       new(book: book, chapter_number: chapter_number, verse_number: verse_number)
     end

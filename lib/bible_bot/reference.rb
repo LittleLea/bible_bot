@@ -139,7 +139,7 @@ module BibleBot
     # So any initialized Reference will always be valid.
     # @return [Boolean]
     def valid?
-      end_verse.nil? || end_verse >= start_verse
+      start_verse && end_verse && end_verse >= start_verse
     end
   end
 end

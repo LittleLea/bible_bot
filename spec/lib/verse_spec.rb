@@ -6,12 +6,39 @@ describe Verse do
       [19_105_001, "Psalm 105:1"],
       [1_001_001, "Genesis 1:1"],
       [66_022_021, "Revelation 22:21"],
-    ].each do |integer, expected_reference|
+    ].each do |id, expected_reference|
       context "id=integer" do
         it "initializes verse #{expected_reference}" do
-          expect(Verse.from_id(integer).formatted).to eq(expected_reference)
+          expect(Verse.from_id(id).formatted).to eq(expected_reference)
         end
       end
+    end
+
+    [
+      ["psalms-105-001", "Psalm 105:1"],
+      ["genesis-001-001", "Genesis 1:1"],
+      ["revelation-022-021", "Revelation 22:21"],
+    ].each do |id, expected_reference|
+      context "id=string" do
+        it "initializes verse #{expected_reference}" do
+          expect(Verse.from_id(id).formatted).to eq(expected_reference)
+        end
+      end
+    end
+  end
+
+  describe "id" do
+    let(:id) { 10_020_004 }
+    it "returns back the verse ID" do
+      expect(Verse.from_id(id).id).to eq(id)
+    end
+  end
+
+  describe "string_id" do
+    let(:id) { 10_020_004 }
+    let(:string_id) { "2_samuel-020-004" }
+    it "returns back the verse ID" do
+      expect(Verse.from_id(id).string_id).to eq(string_id)
     end
   end
 

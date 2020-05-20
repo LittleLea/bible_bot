@@ -79,7 +79,6 @@ Each verse is represented by an integer ID that can be stored in your database.
 
 reference.start_verse.id #=> 1_001_001  (Genesis 1:1)
 reference.end_verse.id   #=> 2_010_020  (Exodus 10:20)
-reference.verse_ids      #=> [1_001_001, 2_010_020]
 ```
 
 How you store the `start_verse` and `end_verse` is up to you.

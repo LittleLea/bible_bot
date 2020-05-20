@@ -14,8 +14,4 @@ module BibleBot
   #   "Genesis 100:2"
   class InvalidVerseError < BibleBotError
   end
-
-  # @deprecated Use {#InvalidVerseError} instead.
-  class InvalidVerseID < BibleBotError
-  end
 end
