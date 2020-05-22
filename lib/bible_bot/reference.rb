@@ -21,19 +21,19 @@ module BibleBot
 
     # Parse text into an array of scripture References.
     #
-    # By default, unless you specify `ignore_errors: true`, it will raise the following errors:
-    # * {InvalidVerseError} - If a matching verse is not valid
-    # * {InvalidReferenceError} - If verses are valid but reference is not
-    #
-    # @param text [String] ex: "John 1:1 is the first first but Romans 8:9-10 is another."
-    # @param ignore_errors [Bool]
+    # @param text [String] ex: "John 1:1 is the first but Romans 8:9-10 is another."
+    # @param validate [Boolean, :raise_errors]
+    #   * true - Skip invalid references (default)
+    #   * false - Include invalid references
+    #   * :raise_errors - Raise error if any references are invalid
     # @return [Array<Reference>]
-    def self.parse(text, ignore_errors: false)
-      ReferenceMatch.scan(text).map do |ref_match|
-        ref_match.reference(nil_on_error: ignore_errors)
-      end.compact
-    end
+    def self.parse(text, validate: true)
+      ReferenceMatch.scan(text).map(&:reference).select do |ref|
+        ref.validate! if validate == :raise_errors
 
+        !validate || ref.valid?
+      end
+    end
 
     # start_verse must be before end_verse otherwise it will raise an {InvalidReferenceError}
     #
@@ -42,8 +42,6 @@ module BibleBot
     def initialize(start_verse:, end_verse: nil)
       @start_verse = start_verse
       @end_verse   = end_verse || start_verse
-
-      raise InvalidReferenceError.new "Reference is not vaild: #{inspect}" unless valid?
     end
 
     # Returns a formatted string of the {Reference}.
@@ -114,6 +112,8 @@ module BibleBot
       return @verses if defined? @verses
 
       @verses = []
+      return @verses unless valid?
+
       verse = start_verse
 
       loop do
@@ -133,13 +133,16 @@ module BibleBot
       }
     end
 
-    private
-
-    # This is private because it is called on initialize and raises an error if not valid
-    # So any initialized Reference will always be valid.
     # @return [Boolean]
     def valid?
-      start_verse && end_verse && end_verse >= start_verse
+      start_verse&.valid? && end_verse&.valid? && end_verse >= start_verse
+    end
+
+    # Raises error if reference is invalid
+    def validate!
+      start_verse&.validate!
+      end_verse&.validate!
+      raise InvalidReferenceError.new "Reference is not vaild: #{inspect}" unless valid?
     end
   end
 end

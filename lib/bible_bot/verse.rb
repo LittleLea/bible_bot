@@ -32,8 +32,6 @@ module BibleBot
       @book = book
       @chapter_number = chapter_number
       @verse_number = verse_number
-
-      raise InvalidVerseError.new "Verse is not valid: #{inspect}" unless valid?
     end
 
     # Returns an Integer in the from of
@@ -123,16 +121,19 @@ module BibleBot
       }
     end
 
-    private
-
-    # This is private because it is called on initialize and raises an error if not valid
-    # So any initialized Verse will always be valid.
     # @return [Boolean]
     def valid?
       book.is_a?(BibleBot::Book) &&
       chapter_number.is_a?(Integer) && chapter_number >= 1 && chapter_number <= book.chapters.length &&
       verse_number.is_a?(Integer) && verse_number >= 1 && verse_number <= book.chapters[chapter_number-1]
     end
+
+    # Raises error if reference is invalid
+    def validate!
+      raise InvalidVerseError.new "Verse is not valid: #{inspect}" unless valid?
+    end
+
+    private
 
     # This gets called by {from_id} to allow it to be backwards compatible for a while.
     # @deprecated Use {from_id} instead.

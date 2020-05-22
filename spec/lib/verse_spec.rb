@@ -50,14 +50,8 @@ describe Verse do
       { verse_id: 5_001_047, expect_valid: false },
     ].each do |t|
       context "verse_id=#{t[:verse_id]}" do
-        if t[:expect_valid]
-          it "returns true for valid verse" do
-            expect(Verse.from_id(t[:verse_id]).send(:valid?)).to be true
-          end
-        else
-          it "raises InvalidVerse error on intialize" do
-            expect{ Verse.from_id(t[:verse_id]) }.to raise_error InvalidVerseError
-          end
+        it "#{t[:expect_valid] ? 'is' : 'is not'} valid" do
+          expect(Verse.from_id(t[:verse_id]).valid?).to be t[:expect_valid]
         end
       end
     end
