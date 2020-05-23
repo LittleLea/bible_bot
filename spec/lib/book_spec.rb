@@ -46,4 +46,12 @@ describe BibleBot::Book do
     end
   end
 
+
+  describe "reference" do
+    let(:book) { BibleBot::Book.find_by_name("1 John") }
+
+    it "returns reference" do
+      expect(book.reference.inspect).to include(start_verse: "1 John 1:1", end_verse: "1 John 5:21")
+    end
+  end
 end

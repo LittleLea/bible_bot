@@ -36,6 +36,10 @@ references.first.valid? #=> false
 BibleBot::Reference.parse( "Genesis 100:1", validate: :raise_errors )
 # => BibleBot::InvalidVerseError:
 #      Verse is not valid: {:book=>"Genesis", :chapter_number=>100, :verse_number=>1}
+
+# Find Books
+book = BibleBot::Book.find_by_name("1 John")
+book.reference.inspect #=> {:start_verse=>"1 John 1:1", :end_verse=>"1 John 5:21"}
 ```
 
 ## Core Concepts

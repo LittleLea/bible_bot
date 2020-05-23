@@ -19,7 +19,7 @@ module BibleBot
     def self.find_by_name(name)
       return nil if name.nil? || name.strip == ""
 
-      Bible.books.find { |book| name.match(Regexp.new('\b'+book.regex, Regexp::IGNORECASE)) }
+      Bible.books.find { |book| name.match(Regexp.new('\b'+book.regex+'\b', Regexp::IGNORECASE)) }
     end
 
     # Find by the Book ID defined in {Bible}.
@@ -51,6 +51,24 @@ module BibleBot
     # @return [Boolean]
     def single_chapter?
       chapters.length == 1
+    end
+
+    # A reference containing the entire book
+    # @return [Reference]
+    def reference
+      @reference ||= Reference.new(start_verse: start_verse, end_verse: end_verse)
+    end
+
+    # @return [Verse]
+    def start_verse
+      @first_verse ||= Verse.from_id("#{id}001001".to_i)
+    end
+
+    # @return [Verse]
+    def end_verse
+      @last_verse ||= Verse.from_id(
+        "#{id}#{chapters.length.to_s.rjust(3, '0')}#{chapters.last.to_s.rjust(3, '0')}".to_i
+      )
     end
 
     # @return [Book, nil]
