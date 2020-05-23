@@ -42,6 +42,23 @@ describe Verse do
     end
   end
 
+  describe "next_verse" do
+    context "starting at Genesis 1:1" do
+      let(:starting_verse) { Verse.from_id(1_001_001) }
+
+      it "works through every verse in the bible" do
+        count = 0
+        verse = starting_verse
+        while verse do
+          verse = verse.next_verse
+          count += 1
+        end
+
+        expect(count).to eq(31_103)
+      end
+    end
+  end
+
   describe 'valid?' do
     [
       { verse_id: 1_050_001, expect_valid: true },

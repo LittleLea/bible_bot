@@ -28,6 +28,8 @@ module BibleBot
     #   * :raise_errors - Raise error if any references are invalid
     # @return [Array<Reference>]
     def self.parse(text, validate: true)
+      return [] if text.nil? || text.strip == ""
+
       ReferenceMatch.scan(text).map(&:reference).select do |ref|
         ref.validate! if validate == :raise_errors
 
@@ -35,10 +37,8 @@ module BibleBot
       end
     end
 
-    # start_verse must be before end_verse otherwise it will raise an {InvalidReferenceError}
-    #
     # @param start_verse [Verse]
-    # @param end_verse [Verse]
+    # @param end_verse [Verse] Defaults to start_verse if no end_verse is provided
     def initialize(start_verse:, end_verse: nil)
       @start_verse = start_verse
       @end_verse   = end_verse || start_verse

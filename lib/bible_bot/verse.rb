@@ -1,6 +1,5 @@
 module BibleBot
-  # Verse represents a single verse in the bible. All verses are validated
-  # on initialize and will raise {BibleBot::InvalidVerseID} if invalid.
+  # Verse represents a single verse in the bible.
   class Verse
     include Comparable
 
@@ -28,7 +27,10 @@ module BibleBot
       new(book: book, chapter_number: chapter_number, verse_number: verse_number)
     end
 
-    def initialize(book: nil, chapter_number: nil,  verse_number: nil)
+    # @param book [Book]
+    # @param chapter_number [Integer]
+    # @param verse_number [Integer]
+    def initialize(book:, chapter_number:,  verse_number:)
       @book = book
       @chapter_number = chapter_number
       @verse_number = verse_number

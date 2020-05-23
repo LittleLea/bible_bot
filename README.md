@@ -42,7 +42,7 @@ book = BibleBot::Book.find_by_name("1 John")
 book.reference.inspect #=> {:start_verse=>"1 John 1:1", :end_verse=>"1 John 5:21"}
 ```
 
-## Core Concepts
+## Terms
 
 * `Verse` - A single verse in the bible.
 * `Reference` - A range of two verses. Start and end verse may be equal, in which case it is a single verse reference.

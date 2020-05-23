@@ -1,12 +1,12 @@
 module BibleBot
-  # This class is contains all the logic for mapping the different parts of a scripture Match into an actual {Reference}.
+  # This class contains all the logic for mapping the different parts of a scripture Match into an actual {Reference}.
   # It wraps the Match returned from the regular expression defined in {Bible.scripture_re}.
   #
   # A scripture reference can take many forms, but the least abbreviated form is:
   #
   #   Genesis 1:1 - Genesis 1:2
   #
-  # Internally, this class represents this using the following variables:
+  # Internally, this class represents this form using the following variables:
   #
   #   b1 c1:v1 - b2 c2:v2
   #
@@ -51,7 +51,7 @@ module BibleBot
       end
     end
 
-    # @return [Reference]
+    # @return [Reference] Note: Reference is not yet validated
     def reference
       @reference ||= Reference.new(
         start_verse: Verse.new(book: start_book, chapter_number: start_chapter.to_i, verse_number: start_verse.to_i),
@@ -68,6 +68,8 @@ module BibleBot
     attr_reader :c2 # @return [String, nil] Represents the number after the end Book name, could be either chapter or verse number.
     attr_reader :v2 # @return [String, nil] Represents the number after the colon, will always be end_verse if present.
 
+    # @param match [Match]
+    # @param offset [Integer]
     def initialize(match, offset)
       @match = match
       @length = match.to_s.length
@@ -80,28 +82,36 @@ module BibleBot
       @v2 = match[:EndVerseNumber]
     end
 
+    # @return [Book]
     def start_book
       # There will always be a starting book.
       Book.find_by_name(@b1)
     end
 
+    # @return [Book]
     def end_book
-      # The end book is optional. If not provided, it is assumed it is the same as the starting book.
+      # The end book is optional. If not provided, default to starting book.
       Book.find_by_name(@b2) || start_book
     end
 
+    # @return [Integer]
     def start_chapter
       # Start chapter should always be provided, except in the case of single chapter books.
+      # Jude 5 for example, c1==5 but the chapter should actually be 1.
       return 1 if start_book.single_chapter?
       c1
     end
 
+    # @return [Integer]
     def start_verse
-      # Start verse should always be provided.
-      # The one exception is that for single chapter books, the verse might be in the chapter's place, and v1 is nil.
+      # If there is a number in the v1 position, it will always represent the starting verse.
+      # There are a few cases where the start_verse will be in a different position or inferred.
+      # * Jude 4    (start_verse is in the c1 position)
+      # * Genesis 5 (start_verse is inferred to be 1, and end_verse is the last verse in Genesis 5)
       v1 || (start_book.single_chapter? ? c1 : 1)
     end
 
+    # @return [Integer]
     def end_chapter
       return start_chapter if single_verse_ref? # Ex: Genesis 1:3 => "1"
       return 1 if end_book.single_chapter? # Ex: Jude 2-4 => "1"
@@ -110,6 +120,7 @@ module BibleBot
       c1      # Ex: Genesis 5 => "5"
     end
 
+    # @return [Integer]
     def end_verse
       return start_verse if single_verse_ref? # Ex: Genesis 1:3 => "3"
       v2 || # Ex: Genesis 1:4 - 2:5 => "5"
@@ -120,10 +131,11 @@ module BibleBot
       )
     end
 
-    # If there is no match for b2, c2, or v2
+    # @return [Boolean]
     def single_verse_ref?
       !b2 && !c2 && !v2 &&
       (v1 || start_book.single_chapter?) # Ex: Genesis 5:1 || Jude 5
+      # Genesis 5 is not a single verse ref
     end
   end
 end
