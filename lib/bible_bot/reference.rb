@@ -1,117 +1,148 @@
 module BibleBot
+  # A Reference represents a range of verses.
   class Reference
+    attr_reader :start_verse # @return [Verse]
+    attr_reader :end_verse # @return [Verse]
 
-    attr_accessor :book
-    attr_accessor :chapter_number
-    attr_accessor :verse_number
-    attr_accessor :end_chapter_number
-    attr_accessor :end_verse_number
-
-    def self.from_verse_id(verse_id)
-      parts = verse_id.split( '-' )
-
-      book_name      = parts[0].gsub( '_', ' ' )
-      chapter_number = parts[1].to_i
-      verse_number   = parts[2].to_i
-
-      book = BibleBot::Bible.books.select{ |b| b.name.downcase == book_name }.first
-
-      raise BibleBot::InvalidVerseID if book.nil?
-
-      return Reference.new( book: book, chapter_number: chapter_number, verse_number: verse_number )
+    # Initialize a {Reference} from {Verse} IDs. If no end_verse_id is provided, it will
+    # set end_verse to equal start_verse.
+    #
+    # @param start_verse_id [Integer]
+    # @param end_verse_id [Integer]
+    # @return [Reference]
+    # @example
+    #   BibleBot::Reference.from_verse_ids(1001001, 1001010) #=> (Gen 1:1-10)
+    def self.from_verse_ids(start_verse_id, end_verse_id=nil)
+      new(
+        start_verse: Verse.from_id(start_verse_id),
+        end_verse: Verse.from_id(end_verse_id || start_verse_id),
+      )
     end
 
+    # Parse text into an array of scripture References.
+    #
+    # @param text [String] ex: "John 1:1 is the first but Romans 8:9-10 is another."
+    # @param validate [Boolean, :raise_errors]
+    #   * true - Skip invalid references (default)
+    #   * false - Include invalid references
+    #   * :raise_errors - Raise error if any references are invalid
+    # @return [Array<Reference>]
+    def self.parse(text, validate: true)
+      return [] if text.nil? || text.strip == ""
 
-    def initialize( book: nil, chapter_number: nil, verse_number: nil, end_chapter_number: nil, end_verse_number: nil )
-      self.book               = book
-      self.chapter_number     = chapter_number
-      self.verse_number       = verse_number
-      self.end_chapter_number = end_chapter_number
-      self.end_verse_number   = end_verse_number
+      ReferenceMatch.scan(text).map(&:reference).select do |ref|
+        ref.validate! if validate == :raise_errors
 
-      if end_chapter_number.nil?
-        self.end_chapter_number = chapter_number
-      end
-
-      if end_verse_number.nil? && (self.chapter_number != self.end_chapter_number)
-        self.end_verse_number = self.book.chapters[self.end_chapter_number - 1]
-      elsif end_verse_number.nil?
-        self.end_verse_number = self.verse_number
+        !validate || ref.valid?
       end
     end
 
-    def formatted(always_include_chapter: false)
-      if same_start_and_end_chapter?
-        if single_chapter_book? && !always_include_chapter
-          if same_start_and_end_verse?
-            return "#{book.formatted_name} #{verse_number}"
-          else
-            return "#{book.formatted_name} #{verse_number}-#{end_verse_number}"
-          end
-        else
-          if full_chapters?
-            return "#{book.formatted_name} #{chapter_number}"
-          elsif same_start_and_end_verse?
-            return "#{book.formatted_name} #{chapter_number}:#{verse_number}"
-          else
-            return "#{book.formatted_name} #{chapter_number}:#{verse_number}-#{end_verse_number}"
-          end
-        end
-      else # start and end chapters are different
-        if full_chapters?
-          return "#{book.formatted_name} #{chapter_number}-#{end_chapter_number}"
-        else
-          return "#{book.formatted_name} #{chapter_number}:#{verse_number}-#{end_chapter_number}:#{end_verse_number}"
-        end
-      end
+    # @param start_verse [Verse]
+    # @param end_verse [Verse] Defaults to start_verse if no end_verse is provided
+    def initialize(start_verse:, end_verse: nil)
+      @start_verse = start_verse
+      @end_verse   = end_verse || start_verse
     end
 
+    # Returns a formatted string of the {Reference}.
+    #
+    # @return [String]
+    # @example
+    #   reference.formatted #=> "Genesis 2:4-5:9"
+    def formatted
+      formatted_verses = [start_verse.formatted(include_verse: !full_chapters?)]
+
+      if end_verse && end_verse > start_verse && !(same_start_and_end_chapter? && full_chapters?)
+        formatted_verses << end_verse.formatted(
+          include_book: !same_start_and_end_book?,
+          include_chapter: !same_start_and_end_chapter?,
+          include_verse: !full_chapters?,
+        )
+      end
+
+      formatted_verses.join('-')
+    end
+
+    # @return [Boolean]
+    def same_start_and_end_book?
+      start_verse.book == end_verse&.book
+    end
+
+    # @return [Boolean]
     def same_start_and_end_chapter?
-      chapter_number == end_chapter_number || end_chapter_number.nil?
+      same_start_and_end_book? &&
+      start_verse.chapter_number == end_verse&.chapter_number
     end
 
-    def same_start_and_end_verse?
-      verse_number == end_verse_number || end_verse_number.nil?
-    end
-
-    # Single chapter book like Jude
-    def single_chapter_book?
-      book.chapters.length == 1
-    end
-
-    # One or multiple full chapters
+    # One or multiple full chapters.
+    #
+    # @return [Boolean]
     def full_chapters?
-      verse_number == 1 && end_verse_number == book.chapters[(end_chapter_number || chapter_number)-1]
+      start_verse.verse_number == 1 && end_verse&.last_verse_in_chapter?
     end
 
+    # @return [string]
     def to_s
       "BibleBot::Reference — #{formatted}"
     end
 
-    def verses
-      verses = []
+    # Returns true if the given verse is within the start and end verse of the Reference.
+    #
+    # @param verse [Verse]
+    # @return [Boolean]
+    def includes_verse?(verse)
+      return false unless verse.is_a?(Verse)
 
-      (chapter_number..end_chapter_number).each do |c|
-        # end verse is last verse unless c == end_chapter_number, in which case it's end_verse_number
-        if c == chapter_number
-          sv = verse_number
-        else
-          sv = 1
-        end
-
-        if c == end_chapter_number
-          ev = end_verse_number
-        else
-          ev = book.chapters[c-1] # this is the number of verses in this chapter
-        end
-
-        (sv..ev).each do |v|
-          verses.push( Verse.new( book: book, chapter_number: c, verse_number: v ) )
-        end
-      end
-
-      verses
+      start_verse <= verse && verse <= end_verse
     end
 
+    # Return true if the two references contain any of the same verses.
+    # @param other [Reference]
+    # @return [Boolean]
+    def intersects_reference?(other)
+      return false unless other.is_a?(Reference)
+
+      start_verse <= other.end_verse && end_verse >= other.start_verse
+    end
+
+    # Returns an array of all the verses contained in the Reference.
+    #
+    # @return [Array<Verse>]
+    def verses
+      return @verses if defined? @verses
+
+      @verses = []
+      return @verses unless valid?
+
+      verse = start_verse
+
+      loop do
+        @verses << verse
+        break if end_verse.nil? || verse == end_verse
+        verse = verse.next_verse
+      end
+
+      @verses
+    end
+
+    # @return [Hash]
+    def inspect
+      {
+        start_verse: start_verse&.formatted,
+        end_verse: end_verse&.formatted,
+      }
+    end
+
+    # @return [Boolean]
+    def valid?
+      start_verse&.valid? && end_verse&.valid? && end_verse >= start_verse
+    end
+
+    # Raises error if reference is invalid
+    def validate!
+      start_verse&.validate!
+      end_verse&.validate!
+      raise InvalidReferenceError.new "Reference is not vaild: #{inspect}" unless valid?
+    end
   end
 end
