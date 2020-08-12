@@ -46,11 +46,12 @@ module BibleBot
 
     # Returns a formatted string of the {Reference}.
     #
+    # @param include_chapter_on_single_chapter_books [Boolean]
     # @return [String]
     # @example
     #   reference.formatted #=> "Genesis 2:4-5:9"
-    def formatted
-      formatted_verses = [start_verse.formatted(include_verse: !full_chapters?)]
+    def formatted(include_chapter_on_single_chapter_books: false)
+      formatted_verses = [start_verse.formatted(include_verse: !full_chapters?, include_chapter_on_single_chapter_books: include_chapter_on_single_chapter_books)]
 
       if end_verse && end_verse > start_verse && !(same_start_and_end_chapter? && full_chapters?)
         formatted_verses << end_verse.formatted(
