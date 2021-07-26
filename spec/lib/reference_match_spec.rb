@@ -154,6 +154,7 @@ describe BibleBot::ReferenceMatch do
       {ref: "Jude 5", expected: ["Jude 5"]},
       {ref: "Revelation 1:1", expected: ["Revelation 1:1"]},
       {ref: "Rev 1:1", expected: ["Revelation 1:1"]},
+      {ref: "Genesis 13:11b-12", expected: ["Genesis 13:11-12"]}
     ]
 
     test_cases.each do |t|

@@ -556,7 +556,7 @@ module BibleBot
          '[\s\.]*' +
          '(?<ChapterNumber>\d{1,3})' +
          '(?:\s*[:\.]\s*' +
-         '(?<VerseNumber>\d{1,3}))?' +
+         '(?<VerseNumber>\d{1,3})\w?)?' +
          '(?:\s*-\s*' +
            '(?<EndBookTitle>%s)?[\s\.]*' +
            '(?<EndChapterNumber>\d{1,3})?' +
