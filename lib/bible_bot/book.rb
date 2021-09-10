@@ -1,5 +1,5 @@
 module BibleBot
-  # Represents one of the 66 books in the bible (Genesis - Revelation).
+  # Represents one of the 66 books in the Bible (Genesis - Revelation), or one of the books in the Apocrypha.
   # You should never need to initialize a Book, they are initialized in {Bible}.
   class Book
     attr_reader :id # @return [Integer]
@@ -8,6 +8,8 @@ module BibleBot
     attr_reader :regex # @return [String]
     attr_reader :chapters # @return [Array<Integer>]
     attr_reader :testament # @return [String]
+    attr_reader :bible # @return [Boolean]
+    attr_reader :apocrypha # @return [Boolean]
 
     # Uses the same Regex pattern to match as we use in {Reference.parse}.
     # So this supports the same book name abbreviations.
@@ -30,13 +32,15 @@ module BibleBot
       Bible.books.find { |book| book.id == id }
     end
 
-    def initialize(id:, name:, abbreviation:, regex:, chapters: [] , testament:)
+    def initialize(id:, name:, abbreviation:, regex:, chapters: [] , testament:, bible:, apocrypha:)
       @id = id
       @name = name
       @abbreviation = abbreviation
       @regex = regex
       @chapters = chapters
       @testament = testament
+      @bible = bible
+      @apocrypha = apocrypha
     end
 
     # @return [String]
