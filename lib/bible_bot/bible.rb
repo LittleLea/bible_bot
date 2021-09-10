@@ -579,7 +579,7 @@ module BibleBot
         id: 106,
         name: "Ecclesiasticus", # a.k.a. Sirach
         abbreviation: "Ecclus",
-        regex: "(?:(Eccle?u?s))",
+        regex: "(?:Ecclus|Ecclesiasticus)",
         testament: "",
         chapters: [29, 18, 30, 31, 17, 37, 36, 19, 18, 30, 34, 18, 25, 27, 20, 28, 27, 33, 26, 30, 28, 27, 27, 31, 25, 20, 30, 26, 28, 25, 31, 24, 33, 26, 24, 27, 30, 34, 35, 30, 24, 25, 35, 23, 26, 20, 25, 25, 16, 29, 30],
       ),
