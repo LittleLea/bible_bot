@@ -19,4 +19,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'rspec', '~> 3.5.0'
   spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'irb'
 end

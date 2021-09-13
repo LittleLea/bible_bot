@@ -138,6 +138,19 @@ verse == other_verse
 verse > other_verse
 ```
 
+## Deuterocanonical References
+
+If you want to match deuterocanonical references in your strings, you can enable a collection of matchers like this:
+
+```ruby
+BibleBot.include_deuterocanonical_content = true
+
+ReferenceMatch.scan( "Tob 1:1" ).first.reference.formatted
+
+# > "Tobit 1:1"
+```
+
+You can see the supported deuterocanonical works in [bible.rb](https://github.com/LittleLea/bible_bot/blob/b94fe9b3948ceb23d39961ffdc4bdf7ffe23eff3/lib/bible_bot/bible.rb#L537)
 
 ## History
 
