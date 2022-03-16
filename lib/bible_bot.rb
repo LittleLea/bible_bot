@@ -35,7 +35,7 @@ module BibleBot
   end
 
   def self.include_deuterocanonical_content=(inc)
-    self.options.include_deuterocanonical_content = (inc === true)
+    self.options.include_deuterocanonical_content = (inc == true)
 
     # We need to reset the stored regexps because they take content into account.
     BibleBot::Bible.reset_regular_expressions
