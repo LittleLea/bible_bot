@@ -6,6 +6,7 @@ require "bible_bot/errors"
 require "bible_bot/verse"
 require "bible_bot/reference"
 require "bible_bot/reference_match"
+require "bible_bot/references"
 
 module BibleBot
   DEFAULTS = {

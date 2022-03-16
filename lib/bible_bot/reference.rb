@@ -19,22 +19,24 @@ module BibleBot
       )
     end
 
-    # Parse text into an array of scripture References.
+    # Parse text into an array-like object of scripture References.
     #
     # @param text [String] ex: "John 1:1 is the first but Romans 8:9-10 is another."
     # @param validate [Boolean, :raise_errors]
     #   * true - Skip invalid references (default)
     #   * false - Include invalid references
     #   * :raise_errors - Raise error if any references are invalid
-    # @return [Array<Reference>]
+    # @return [References<Reference>]
     def self.parse(text, validate: true)
-      return [] if text.nil? || text.strip == ""
+      return References.new([]) if text.nil? || text.strip == ""
 
-      ReferenceMatch.scan(text).map(&:reference).select do |ref|
+      arr = ReferenceMatch.scan(text).map(&:reference).select do |ref|
         ref.validate! if validate == :raise_errors
 
         !validate || ref.valid?
       end
+
+      return References.new(arr)
     end
 
     # @param start_verse [Verse]
