@@ -28,15 +28,17 @@ module BibleBot
     #   * :raise_errors - Raise error if any references are invalid
     # @return [References<Reference>]
     def self.parse(text, validate: true)
-      return References.new([]) if text.nil? || text.strip == ""
+      references = if text.nil? || text.strip == ""
+        []
+      else
+        ReferenceMatch.scan(text).map(&:reference).select do |ref|
+          ref.validate! if validate == :raise_errors
 
-      arr = ReferenceMatch.scan(text).map(&:reference).select do |ref|
-        ref.validate! if validate == :raise_errors
-
-        !validate || ref.valid?
+          !validate || ref.valid?
+        end
       end
 
-      return References.new(arr)
+      return References.new(references)
     end
 
     # @param start_verse [Verse]
