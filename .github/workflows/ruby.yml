@@ -6,13 +6,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        ruby-version: [ '2.6', '2.7', '3.0', '3.1' ]
+
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6
-    - name: Install dependencies
-      run: bundle install
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
     - name: Run tests
       run: bundle exec rspec
