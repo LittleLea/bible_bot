@@ -46,6 +46,12 @@ describe BibleBot::Book do
     end
   end
 
+  describe "string_id" do
+    it "returns the book's string id" do
+      book = BibleBot::Book.find_by_id(53)
+      expect(book.string_id).to eq('2_thessalonians')
+    end
+  end
 
   describe "reference" do
     let(:book) { BibleBot::Book.find_by_name("1 John") }

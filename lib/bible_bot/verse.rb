@@ -57,7 +57,7 @@ module BibleBot
     # @deprecated Use {id} instead
     # @return [String] ex: "psalms-023-001"
     def string_id
-      "#{book.name.downcase.gsub(' ', '_')}-#{chapter_number.to_s.rjust(3, '0')}-#{verse_number.to_s.rjust(3, '0')}"
+      "#{book.string_id}-#{chapter_number.to_s.rjust(3, '0')}-#{verse_number.to_s.rjust(3, '0')}"
     end
 
     # The Comparable mixin uses this to define all the other comparable methods
