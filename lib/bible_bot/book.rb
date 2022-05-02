@@ -19,7 +19,8 @@ module BibleBot
     def self.find_by_name(name)
       return nil if name.nil? || name.strip == ""
 
-      Bible.books.find { |book| name.match(Regexp.new('\b'+book.regex+'\b', Regexp::IGNORECASE)) }
+      BibleBot::Bible.books.detect { |b| b.name.casecmp?(name) } ||
+        Bible.books.find { |book| name.match(Regexp.new('\b'+book.regex+'\b', Regexp::IGNORECASE)) }
     end
 
     # Find by the Book ID defined in {Bible}.
