@@ -6,6 +6,7 @@ module BibleBot
     attr_reader :name # @return [String]
     attr_reader :abbreviation # @return [String]
     attr_reader :regex # @return [String]
+    attr_reader :regex_matcher # @return [Regexp]
     attr_reader :chapters # @return [Array<Integer>]
     attr_reader :testament # @return [String]
 
@@ -19,8 +20,7 @@ module BibleBot
     def self.find_by_name(name)
       return nil if name.nil? || name.strip == ""
 
-      BibleBot::Bible.books.detect { |b| b.name.casecmp?(name) } ||
-        Bible.books.find { |book| name.match(Regexp.new('\b'+book.regex+'\b', Regexp::IGNORECASE)) }
+      Bible.books.detect { |book| book.name.casecmp?(name) || book.regex_matcher.match?(name) }
     end
 
     # Find by the Book ID defined in {Bible}.
@@ -38,6 +38,7 @@ module BibleBot
       @regex = regex
       @chapters = chapters
       @testament = testament
+      @regex_matcher = Regexp.new('\b'+regex+'\b', Regexp::IGNORECASE).freeze
     end
 
     # @return [String]
