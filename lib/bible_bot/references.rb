@@ -27,7 +27,7 @@ module BibleBot
 
     # Is the reference 1 bible chapter, such as "Matthew 1" or "John 3"?
     #
-    # @return Boolean
+    # @return [Boolean]
     # @example
     #  BibleBot::Reference.parse('Matthew 1').single_full_chapter?
     #  #=> true
@@ -35,6 +35,10 @@ module BibleBot
       length == 1 && first.same_start_and_end_chapter? && first.full_chapters?
     end
 
+    # @return [Array<String>]
+    # @example
+    #   BibleBot::Reference.parse('Matthew 1-2, John 3-4').chapter_string_ids
+    #   #=> ['matthew-001', 'matthew-002', 'john-003', 'john-004']
     def chapter_string_ids
       chapters = []
       each do |reference|
