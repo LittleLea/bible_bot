@@ -149,8 +149,7 @@ module BibleBot
       chapter_number = parts[1].to_i
       verse_number   = parts[2].to_i
 
-      book = BibleBot::Bible.books.select{ |b| b.name.downcase == book_name }.first
-
+      book = BibleBot::Book.find_by_name(book_name)
       new(book: book, chapter_number: chapter_number, verse_number: verse_number)
     end
   end
