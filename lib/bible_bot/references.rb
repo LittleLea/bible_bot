@@ -25,5 +25,15 @@ module BibleBot
       flat_map { |r| r.verses.map(&:string_id) }
     end
 
+    # Is the reference 1 bible chapter, such as "Matthew 1" or "John 3"?
+    #
+    # @return Boolean
+    # @example
+    #  BibleBot::Reference.parse('Matthew 1').single_full_chapter?
+    #  #=> true
+    def single_full_chapter?
+      length == 1 && first.same_start_and_end_chapter? && first.full_chapters?
+    end
+
   end
 end
