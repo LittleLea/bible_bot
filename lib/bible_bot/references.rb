@@ -35,5 +35,18 @@ module BibleBot
       length == 1 && first.same_start_and_end_chapter? && first.full_chapters?
     end
 
+    def chapter_string_ids
+      chapters = []
+      each do |reference|
+        reference.verses.each do |verse|
+          chapters << [verse.book, verse.chapter_number]
+        end
+      end
+
+      chapters.uniq.map do |book, chapter|
+        "#{book.string_id}-#{chapter.to_s.rjust(3, '0')}"
+      end
+    end
+
   end
 end

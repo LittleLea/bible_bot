@@ -6,7 +6,7 @@ describe BibleBot::References do
 
   it { expect(references).to be_a(described_class) }
 
-  describe 'single_full_chapter?' do
+  describe '#single_full_chapter?' do
     subject { references.single_full_chapter? }
 
     let(:reference_string) { 'Matthew 1' }
@@ -32,6 +32,14 @@ describe BibleBot::References do
       let(:reference_string) { 'Matthew 1, John 3' }
       it { is_expected.to eq(false) }
     end
+  end
+
+  describe '#chapter_string_ids' do
+    subject { references.chapter_string_ids }
+
+    let(:reference_string) { 'Matthew 1:3-10, Matthew 3-4, John 2:4-7' }
+
+    it { is_expected.to eq(['matthew-001', 'matthew-003', 'matthew-004', 'john-002']) }
   end
 
   describe '#ids' do
