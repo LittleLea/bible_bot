@@ -32,7 +32,20 @@ module BibleBot
     #  BibleBot::Reference.parse('Matthew 1').single_full_chapter?
     #  #=> true
     def single_full_chapter?
-      length == 1 && first.same_start_and_end_chapter? && first.full_chapters?
+      single_chapter? && first.full_chapters?
+    end
+
+    # Does the scripture span more than 1 bible chapter?
+    #
+    # @return [Boolean]
+    # @example
+    #  BibleBot::Reference.parse('Matthew 1:4-9').single_chapter?
+    #  #=> true
+    #
+    #  BibleBot::Reference.parse('Matthew 1:3-2:1').single_chapter?
+    #  #=> false
+    def single_chapter?
+      length == 1 && first.same_start_and_end_chapter?
     end
 
     # @return [Array<String>]

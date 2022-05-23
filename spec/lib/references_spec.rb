@@ -6,6 +6,34 @@ describe BibleBot::References do
 
   it { expect(references).to be_a(described_class) }
 
+  describe '#single_chapter?' do
+    subject { references.single_chapter? }
+
+    let(:reference_string) { 'Matthew 1' }
+
+    it { is_expected.to eq(true) }
+
+    context 'when verbose full chapter' do
+      let(:reference_string) { 'Matthew 1:1-25' }
+      it { is_expected.to eq(true) }
+    end
+
+    context 'when multiple chapters' do
+      let(:reference_string) { 'Matthew 1-2' }
+      it { is_expected.to eq(false) }
+    end
+
+    context 'when partial chapter' do
+      let(:reference_string) { 'Matthew 1:3-5' }
+      it { is_expected.to eq(true) }
+    end
+
+    context 'when multiple references' do
+      let(:reference_string) { 'Matthew 1, John 3' }
+      it { is_expected.to eq(false) }
+    end
+  end
+
   describe '#single_full_chapter?' do
     subject { references.single_full_chapter? }
 
