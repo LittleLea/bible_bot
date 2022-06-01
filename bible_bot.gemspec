@@ -8,14 +8,16 @@ Gem::Specification.new do |spec|
   spec.version       = BibleBot::VERSION
   spec.authors       = ["Jeff McFadden"]
   spec.email         = ["jeff@littlelea.co"]
-  spec.summary       = %q{Bible Verse Parsing, etc.}
+  spec.summary       = 'Bible Verse Parsing, etc.'
   spec.homepage      = "https://github.com/lightstock/bible_bot"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.files         = Dir.glob('{lib}/**/*', File::FNM_DOTMATCH)
+  spec.bindir        = 'exe'
+  spec.executables   = []
+  spec.test_files    = []
   spec.require_paths = ["lib"]
+  spec.extra_rdoc_files = ['LICENSE', 'README.md']
 
   spec.add_development_dependency 'rspec', '~> 3.5.0'
   spec.add_development_dependency 'pry'
