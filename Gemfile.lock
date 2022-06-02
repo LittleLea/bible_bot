@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bible_bot (2.2.0)
+    bible_bot (2.2.1)
 
 GEM
   remote: https://rubygems.org/
