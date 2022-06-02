@@ -53,6 +53,8 @@ describe BibleBot::Reference do
       ['Phil 1–4', 'Philippians 1-4'], # endash
       ['Phil 1—4', 'Philippians 1-4'], # emdash
       ['Philem 1', 'Philemon 1'],  # single-chapter book
+      ['Philemon 1:1-25', 'Philemon 1'], # whole chapter
+      ['Philemon 1:1-24', 'Philemon 1:1-24'], # partial chapter
     ].each do |given, expected|
       it %Q|normalizes the "#{given}" to "#{expected}"| do
         expect(described_class.normalize(given)).to eq(expected)
@@ -69,9 +71,9 @@ describe BibleBot::Reference do
       [1_001_001, 1_002_004, "Genesis 1:1-2:4"],
       [1_001_001, 1_002_025, "Genesis 1-2"],
       [1_002_003, 1_003_003, "Genesis 2:3-3:3"],
-      [65_001_001, 65_001_006, "Jude 1-6"],
-      [65_001_001, 65_001_025, "Jude"],
-      [65_001_001, 66_001_015, "Jude 1-Revelation 1:15"],
+      [65_001_001, 65_001_006, "Jude 1:1-6"],
+      [65_001_001, 65_001_025, "Jude 1"],
+      [65_001_001, 66_001_015, "Jude 1:1-Revelation 1:15"],
       [1_050_001, 2_002_013, "Genesis 50:1-Exodus 2:13"],
       [1_001_001, 2_001_001, "Genesis 1:1-Exodus 1:1"],
     ].each do |start_verse_id, end_verse_id, expected_formated_value|

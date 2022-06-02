@@ -73,22 +73,17 @@ module BibleBot
 
     # @param include_book [Boolean]
     # @param include_chapter [Boolean]
-    # @param include_chapter_on_single_chapter_books [Boolean]
     # @param include_verse [Boolean]
     # @return [String]
     # @example
     #   verse.formatted #=> "Genesis 5:23"
-    def formatted(include_book: true, include_chapter: true, include_chapter_on_single_chapter_books: false, include_verse: true)
+    def formatted(include_book: true, include_chapter: true, include_verse: true)
       str = String.new # Using String.new because string literals will be frozen in Ruby 3.0
       str << "#{book.formatted_name} " if include_book
 
-      if book.single_chapter? && include_chapter_on_single_chapter_books == false
-        str << "#{verse_number}" if include_verse
-      else
-        str << "#{chapter_number}" if include_chapter
-        str << ":" if include_chapter && include_verse
-        str << "#{verse_number}" if include_verse
-      end
+      str << "#{chapter_number}" if include_chapter
+      str << ":" if include_chapter && include_verse
+      str << "#{verse_number}" if include_verse
 
       str.strip.freeze
     end

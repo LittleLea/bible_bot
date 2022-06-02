@@ -98,9 +98,6 @@ module BibleBot
 
     # @return [Integer]
     def start_chapter
-      # Start chapter should always be provided, except in the case of single chapter books.
-      # Jude 5 for example, c1==5 but the chapter should actually be 1.
-      return 1 if start_book.single_chapter?
       c1
     end
 
@@ -110,13 +107,12 @@ module BibleBot
       # There are a few cases where the start_verse will be in a different position or inferred.
       # * Jude 4    (start_verse is in the c1 position)
       # * Genesis 5 (start_verse is inferred to be 1, and end_verse is the last verse in Genesis 5)
-      v1 || (start_book.single_chapter? ? c1 : 1)
+      v1 || 1
     end
 
     # @return [Integer]
     def end_chapter
       return start_chapter if single_verse_ref? # Ex: Genesis 1:3 => "1"
-      return 1 if end_book.single_chapter? # Ex: Jude 2-4 => "1"
       return c1 if !b2 && !v2 && v1  # Ex: Genesis 1:2-3 => "1"
       c2 ||   # Ex: Genesis 1:1 - 2:4 => "4"
       c1      # Ex: Genesis 5 => "5"
@@ -135,8 +131,8 @@ module BibleBot
 
     # @return [Boolean]
     def single_verse_ref?
-      !b2 && !c2 && !v2 &&
-      (v1 || start_book.single_chapter?) # Ex: Genesis 5:1 || Jude 5
+      !b2 && !c2 && !v2 && v1
+      # Ex: Genesis 5:1 || Jude 5
       # Genesis 5 is not a single verse ref
     end
   end

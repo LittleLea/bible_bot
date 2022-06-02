@@ -20,6 +20,7 @@ require 'bible_bot'
 references = BibleBot::Reference.parse( "John 1:1 is the first but Rom 8:9-10 is another." )
 
 # Formatting
+references.formatted #=> "John 1:1, Romans 8:9-10"
 references.map(&:formatted).join( ", " ) #=> "John 1:1, Romans 8:9-10"
 reference = references.last
 reference.start_verse.formatted #=> "Romans 8:9"
@@ -75,12 +76,6 @@ book.reference.inspect #=> {:start_verse=>"1 John 1:1", :end_verse=>"1 John 5:21
 ```ruby
 "Genesis 1"    #=> Genesis 1:1 - Genesis 1:31
 "Genesis 1-2"  #=> Genesis 1:1 - Genesis 2:25
-```
-
-* May omit the chapter number if the book is only a single chapter book.
-
-```ruby
-"Jude 5" #=> Jude 1:5 - Jude 1:5
 ```
 
 ## Persisting References and Verses

@@ -82,8 +82,8 @@ describe BibleBot::ReferenceMatch do
       {ref: "Hos 1:1", expected: ["Hosea 1:1"]},
       {ref: "Joel 1:1", expected: ["Joel 1:1"]},
       {ref: "Amos 1:1", expected: ["Amos 1:1"]},
-      {ref: "Obadiah 1:1", expected: ["Obadiah 1"]},
-      {ref: "Obad 1:1", expected: ["Obadiah 1"]},
+      {ref: "Obadiah 1:1", expected: ["Obadiah 1:1"]},
+      {ref: "Obad 1:1", expected: ["Obadiah 1:1"]},
       {ref: "Jonah 1:1", expected: ["Jonah 1:1"]},
       {ref: "Micah 1:1", expected: ["Micah 1:1"]},
       {ref: "Mic 1:1", expected: ["Micah 1:1"]},
@@ -133,8 +133,8 @@ describe BibleBot::ReferenceMatch do
       {ref: "2 Tim 1:1", expected: ["2 Timothy 1:1"]},
       {ref: "Titus 1:1", expected: ["Titus 1:1"]},
       {ref: "Tit 1:1", expected: ["Titus 1:1"]},
-      {ref: "Philemon 1:1", expected: ["Philemon 1"]},
-      {ref: "Philem 1:1", expected: ["Philemon 1"]},
+      {ref: "Philemon 1:1", expected: ["Philemon 1:1"]},
+      {ref: "Philem 1:1", expected: ["Philemon 1:1"]},
       {ref: "Hebrews 1:1", expected: ["Hebrews 1:1"]},
       {ref: "Heb 1:1", expected: ["Hebrews 1:1"]},
       {ref: "James 1:1", expected: ["James 1:1"]},
@@ -146,26 +146,30 @@ describe BibleBot::ReferenceMatch do
       {ref: "1 John 1:1", expected: ["1 John 1:1"]},
       {ref: "I John 1:1", expected: ["1 John 1:1"]},
       {ref: "1 Jn 1:1", expected: ["1 John 1:1"]},
-      {ref: "2 John 1:1", expected: ["2 John 1"]},
-      {ref: "II John 1:1", expected: ["2 John 1"]},
-      {ref: "2 Jn 1:1", expected: ["2 John 1"]},
-      {ref: "3 John 1:1", expected: ["3 John 1"]},
-      {ref: "III John 1:1", expected: ["3 John 1"]},
-      {ref: "3 Jn 1:1", expected: ["3 John 1"]},
-      {ref: "Jude 1:1", expected: ["Jude 1"]},
-      {ref: "Jude 5", expected: ["Jude 5"]},
+      {ref: "2 John 1:1", expected: ["2 John 1:1"]},
+      {ref: "II John 1:1", expected: ["2 John 1:1"]},
+      {ref: "2 Jn 1:1", expected: ["2 John 1:1"]},
+      {ref: "3 John 1:1", expected: ["3 John 1:1"]},
+      {ref: "III John 1:1", expected: ["3 John 1:1"]},
+      {ref: "3 Jn 1:1", expected: ["3 John 1:1"]},
+      {ref: "Jude 1:1", expected: ["Jude 1:1"]},
       {ref: "Revelation 1:1", expected: ["Revelation 1:1"]},
       {ref: "Rev 1:1", expected: ["Revelation 1:1"]},
       {ref: "Genesis 13:11b-12", expected: ["Genesis 13:11-12"]}
     ]
 
     test_cases.each do |t|
-      it "Can parse \"#{t[:ref]}\"" do
-        expect( ReferenceMatch.scan( t[:ref] ).map {|rm| rm.reference.formatted }).to eq t[:expected]
+      it %Q|Can parse "#{t[:ref]}"| do
+        actual = ReferenceMatch.scan(t[:ref]).map { |rm| rm.reference.formatted }
+
+        expect(actual).to eq t[:expected]
       end
 
-      it "Can parse \"giberish 84 #{t[:ref]} foo bar\"" do
-        expect( ReferenceMatch.scan( "giberish 84 #{t[:ref]} foo bar" ).map {|rm| rm.reference.formatted }).to eq t[:expected]
+      it %Q|Can parse "giberish 84 #{t[:ref]} foo bar"| do
+        actual = ReferenceMatch.scan("giberish 84 #{t[:ref]} foo bar").
+          map { |rm| rm.reference.formatted }
+
+        expect(actual).to eq t[:expected]
       end
     end
   end

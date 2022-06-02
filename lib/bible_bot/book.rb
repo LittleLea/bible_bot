@@ -57,12 +57,6 @@ module BibleBot
       name.downcase.gsub(' ', '_')
     end
 
-    # Single chapter book like Jude
-    # @return [Boolean]
-    def single_chapter?
-      chapters.length == 1
-    end
-
     # A reference containing the entire book
     # @return [Reference]
     def reference
