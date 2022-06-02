@@ -55,6 +55,8 @@ describe BibleBot::Reference do
       ['Philem 1', 'Philemon 1'],  # single-chapter book
       ['Philemon 1:1-25', 'Philemon 1'], # whole chapter
       ['Philemon 1:1-24', 'Philemon 1:1-24'], # partial chapter
+      ['Genesis 100; John 3:16', 'John 3:16'], # partially invalid reference
+      ['Genesis 100; John 50', nil], # invalid references
     ].each do |given, expected|
       it %Q|normalizes the "#{given}" to "#{expected}"| do
         expect(described_class.normalize(given)).to eq(expected)

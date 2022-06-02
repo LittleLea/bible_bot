@@ -15,14 +15,17 @@ module BibleBot
       flat_map { |r| r.verses.map(&:id) }
     end
 
-    # Returns a formatted string of the references
+    # Returns a formatted string of the references, or nil if there are no references.
     #
-    # @return [String]
+    # @return [String, nil]
     # @example
     #   BibleBot::Reference.parse('Gen 1-2, Matt 1-3').formatted
     #   #=> 'Genesis 1-2; Matthew 1-3'
+    #
+    #   BibleBot::Reference.parse('Gen 100-200, Matt 50-80').formatted
+    #   #=> nil
     def formatted
-      map(&:formatted).join('; ')
+      map(&:formatted).join('; ') unless empty?
     end
 
     # All if the string ids of the verses in the references.
