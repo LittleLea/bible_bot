@@ -20,7 +20,7 @@ require 'bible_bot'
 references = BibleBot::Reference.parse( "John 1:1 is the first but Rom 8:9-10 is another." )
 
 # Formatting
-references.formatted #=> "John 1:1, Romans 8:9-10"
+references.formatted #=> "John 1:1; Romans 8:9-10"
 references.map(&:formatted).join( ", " ) #=> "John 1:1, Romans 8:9-10"
 reference = references.last
 reference.start_verse.formatted #=> "Romans 8:9"

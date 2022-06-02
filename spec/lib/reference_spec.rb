@@ -47,7 +47,7 @@ describe BibleBot::Reference do
   describe 'normalize' do
     [
       ['Num 1-2', 'Numbers 1-2'],
-      [" Ps \n 1; Gen 1 -2", 'Psalm 1, Genesis 1-2'], # odd spacing & semicolons
+      [" Ps \n 1; Gen 1 -2", 'Psalm 1; Genesis 1-2'], # odd spacing & semicolons
       ['Ps 1:3-4:5', 'Psalm 1:3-4:5'],
       ['Phil 1-4', 'Philippians 1-4'], # hyphen
       ['Phil 1–4', 'Philippians 1-4'], # endash

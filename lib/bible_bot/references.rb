@@ -19,10 +19,10 @@ module BibleBot
     #
     # @return [String]
     # @example
-    #   BibleBot::Reference.parse('Gen 1-2; Matt 1-3').formatted
-    #   #=> 'Genesis 1-2, Matthew 1-3'
+    #   BibleBot::Reference.parse('Gen 1-2, Matt 1-3').formatted
+    #   #=> 'Genesis 1-2; Matthew 1-3'
     def formatted
-      map(&:formatted).join(', ')
+      map(&:formatted).join('; ')
     end
 
     # All if the string ids of the verses in the references.
