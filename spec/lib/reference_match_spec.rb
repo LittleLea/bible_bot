@@ -16,7 +16,9 @@ describe BibleBot::ReferenceMatch do
       {ref: "Gen 1:1", expected: ["Genesis 1:1"]},
       {ref: "Genesis", expected: []},
       {ref: "Genesis 5", expected: ["Genesis 5"]},
-      {ref: "Genesis 5-10", expected: ["Genesis 5-10"]},
+      {ref: "Genesis 5-10", expected: ["Genesis 5-10"]}, # hyphen
+      {ref: "Genesis 5–10", expected: ["Genesis 5-10"]}, # en dash
+      {ref: "Genesis 5—10", expected: ["Genesis 5-10"]}, # em dash
       {ref: "Genesis 1:1 - Exod 4", expected: ["Genesis 1-Exodus 4"]},
       {ref: "Genesis 3 - Genesis 4:3", expected: ["Genesis 3:1-4:3"]},
       {ref: "Ex", expected: []},

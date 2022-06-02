@@ -4,6 +4,7 @@ describe BibleBot::Reference do
   describe "parse" do
     [
       ["Genesis 1:1", true, nil],
+      ['Genesis 1-3', true, nil],
       ["Genesis 51:4", false, InvalidVerseError],
       ["Romans 5:2-4:11", false, InvalidReferenceError],
     ].each do |ref, expected_valid, expected_error|
@@ -39,6 +40,22 @@ describe BibleBot::Reference do
             end
           end
         end
+      end
+    end
+  end
+
+  describe 'normalize' do
+    [
+      ['Num 1-2', 'Numbers 1-2'],
+      [" Ps \n 1; Gen 1 -2", 'Psalm 1, Genesis 1-2'], # odd spacing & semicolons
+      ['Ps 1:3-4:5', 'Psalm 1:3-4:5'],
+      ['Phil 1-4', 'Philippians 1-4'], # hyphen
+      ['Phil 1–4', 'Philippians 1-4'], # endash
+      ['Phil 1—4', 'Philippians 1-4'], # emdash
+      ['Philem 1', 'Philemon 1'],  # single-chapter book
+    ].each do |given, expected|
+      it %Q|normalizes the "#{given}" to "#{expected}"| do
+        expect(described_class.normalize(given)).to eq(expected)
       end
     end
   end

@@ -45,6 +45,8 @@ module BibleBot
     # @param text [String]
     # @return [Array<ReferenceMatch>]
     def self.scan(text)
+      text = text.tr("\u2013\u2014", '--') # convert en dash & em dash to hyphens
+
       scripture_reg = Bible.scripture_re
       Array.new.tap do |matches|
         text.scan(scripture_reg){ matches << self.new($~, $~.offset(0)[0]) }

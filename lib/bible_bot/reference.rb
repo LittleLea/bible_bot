@@ -41,6 +41,17 @@ module BibleBot
       return References.new(references)
     end
 
+    # Normalizes a scripture reference string into properly formatted references
+    #
+    # @param text [String] ex: ' Ps  1; Gen 1 -2'
+    # @return [String]
+    # @example
+    #   BibleBot::Reference.normalize(' Ps  1; Gen 1 -2')
+    #   #=> 'Psalm 1, Genesis 1-2'
+    def self.normalize(text)
+      self.parse(text).formatted
+    end
+
     # @param start_verse [Verse]
     # @param end_verse [Verse] Defaults to start_verse if no end_verse is provided
     def initialize(start_verse:, end_verse: nil)
