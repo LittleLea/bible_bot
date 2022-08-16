@@ -120,7 +120,7 @@ module BibleBot
         id: 15,
         name: "Ezra",
         abbreviation: "Ezra",
-        regex: "Ezra",
+        regex: "Ez(?:ra|r)?",
         testament: "Old",
         chapters: [11, 70, 13, 24, 17, 22, 28, 36, 15, 44]
       ),
@@ -128,7 +128,7 @@ module BibleBot
         id: 16,
         name: "Nehemiah",
         abbreviation: "Neh",
-        regex: "Neh(?:emiah)?",
+        regex: "Ne(?:hemiah|h)?",
         testament: "Old",
         chapters: [11, 20, 32, 23, 19, 19, 73, 18, 38, 39, 36, 47, 31]
       ),
@@ -136,7 +136,7 @@ module BibleBot
         id: 17,
         name: "Esther",
         abbreviation: "Esth",
-        regex: "Esth(?:er)?",
+        regex: "Es(?:ther|th|t|h)?",
         testament: "Old",
         chapters: [22, 23, 15, 17, 14, 14, 10, 17, 32, 3]
       ),
@@ -144,7 +144,7 @@ module BibleBot
         id: 18,
         name: "Job",
         abbreviation: "Job",
-        regex: "Job",
+        regex: "Jo?b",
         testament: "Old",
         chapters: [22, 13, 26, 21, 27, 30, 21, 22, 35, 22, 20, 25, 28, 22, 35, 22, 16, 21, 29, 29, 34, 30, 17, 25, 6, 14, 23, 28, 25, 31, 40, 22, 33, 37, 16, 33, 24, 41, 30, 24, 34, 17]
       ),
@@ -152,7 +152,7 @@ module BibleBot
         id: 19,
         name: "Psalms",
         abbreviation: "Ps",
-        regex: "Ps(?:a)?(?:lm)?(?:s)?",
+        regex: "Ps(?:alms|alm|s|m|a)?",
         testament: "Old",
         chapters: [6, 12, 8, 8, 12, 10, 17, 9, 20, 18, 7, 8, 6, 7, 5, 11, 15, 50, 14, 9, 13, 31, 6, 10, 22, 12, 14, 9, 11, 12, 24, 11, 22, 22, 28, 12, 40, 22, 13, 17, 13, 11, 5, 26, 17, 11, 9, 14, 20, 23, 19, 9, 6, 7, 23, 13, 11, 11, 17, 12, 8, 12, 11, 10, 13, 20, 7, 35, 36, 5, 24, 20, 28, 23, 10, 12, 20, 72, 13, 19, 16, 8, 18, 12, 13, 17, 7, 18, 52, 17, 16, 15, 5, 23, 11, 13, 12, 9, 9, 5, 8, 28, 22, 35, 45, 48, 43, 13, 31, 7, 10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 3, 18, 3, 3, 21, 26, 9, 8, 24, 13, 10, 7, 12, 15, 21, 10, 20, 14, 9, 6]
       ),
@@ -160,7 +160,7 @@ module BibleBot
         id: 20,
         name: "Proverbs",
         abbreviation: "Prov",
-        regex: "Prov(?:erbs)?",
+        regex: "Pr(?:overbs|ov|o|v)?",
         testament: "Old",
         chapters: [33, 22, 35, 27, 23, 35, 27, 36, 18, 32, 31, 28, 25, 35, 33, 33, 28, 24, 29, 30, 31, 29, 35, 34, 28, 28, 27, 28, 27, 33, 31]
       ),
@@ -168,7 +168,7 @@ module BibleBot
         id: 21,
         name: "Ecclesiastes",
         abbreviation: "Eccl",
-        regex: "Ecc(?:l)?(?:esiastes)?",
+        regex: "Ec(?:clesiastes|cles|cle|c)?",
         testament: "Old",
         chapters: [18, 26, 22, 16, 20, 12, 29, 17, 18, 20, 10, 14]
       ),
@@ -184,7 +184,7 @@ module BibleBot
         id: 23,
         name: "Isaiah",
         abbreviation: "Isa",
-        regex: "Isa(?:iah)?",
+        regex: "Is(?:a|aiah)?",
         testament: "Old",
         chapters: [31, 22, 26, 6, 30, 13, 25, 22, 21, 34, 16, 6, 22, 32, 9, 14, 14, 7, 25, 6, 17, 25, 18, 23, 12, 21, 13, 29, 24, 33, 9, 20, 24, 17, 10, 22, 38, 22, 8, 31, 29, 25, 28, 28, 25, 13, 15, 22, 26, 11, 23, 15, 12, 17, 13, 12, 21, 14, 21, 22, 11, 12, 19, 12, 25, 24]
       ),
@@ -192,7 +192,7 @@ module BibleBot
         id: 24,
         name: "Jeremiah",
         abbreviation: "Jer",
-        regex: "Jer(?:emiah)?",
+        regex: "J(?:eremiah|e|er|r)?",
         testament: "Old",
         chapters: [19, 37, 25, 31, 31, 30, 34, 22, 26, 25, 23, 17, 27, 22, 21, 21, 27, 23, 15, 18, 14, 30, 40, 10, 38, 24, 22, 17, 32, 24, 40, 44, 26, 22, 19, 32, 21, 28, 18, 16, 18, 22, 13, 30, 5, 28, 7, 47, 39, 46, 64, 34]
       ),
@@ -416,7 +416,7 @@ module BibleBot
         id: 52,
         name: "1 Thessalonians",
         abbreviation: "1Thess",
-        regex: "(?:1|I)(?:\\s)?Thess(?:alonians)?",
+        regex: "(?:1|I)(?:\\s)?Thes(?:s)?(?:alonians)?",
         testament: "New",
         chapters: [10, 20, 13, 18, 28]
       ),
@@ -424,7 +424,7 @@ module BibleBot
         id: 53,
         name: "2 Thessalonians",
         abbreviation: "2Thess",
-        regex: "(?:2|II)(?:\\s)?Thess(?:alonians)?",
+        regex: "(?:2|II)(?:\\s)?Thes(?:s)?(?:alonians)?",
         testament: "New",
         chapters: [12, 17, 18]
       ),
