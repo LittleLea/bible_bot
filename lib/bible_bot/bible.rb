@@ -8,7 +8,7 @@ module BibleBot
         id: 1,
         name: "Genesis",
         abbreviation: "Gen",
-        regex: "(?:Gen|Ge)(?:esis)?",
+        regex: "(?:Gen|Ge|Gn)(?:esis)?",
         testament: "Old",
         chapters: [31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26]
       ),
@@ -16,7 +16,7 @@ module BibleBot
         id: 2,
         name: "Exodus",
         abbreviation: "Exod",
-        regex: "Ex(?:odus|od)?",
+        regex: "Ex(?:odus|od|o)?",
         testament: "Old",
         chapters: [22, 25, 22, 31, 23, 30, 25, 32, 35, 29, 10, 51, 22, 31, 27, 36, 16, 27, 25, 26, 36, 31, 33, 18, 40, 37, 21, 43, 46, 38, 18, 35, 23, 35, 35, 38, 29, 31, 43, 38]
       ),
@@ -24,7 +24,7 @@ module BibleBot
         id: 3,
         name: "Leviticus",
         abbreviation: "Lev",
-        regex: "Lev(?:iticus)?",
+        regex: "(?:Lev|Le|Lv)(?:iticus)?",
         testament: "Old",
         chapters: [17, 16, 17, 35, 19, 30, 38, 36, 24, 20, 47, 8, 59, 57, 33, 34, 16, 30, 37, 27, 24, 33, 44, 23, 55, 46, 34]
       ),
@@ -32,7 +32,7 @@ module BibleBot
         id: 4,
         name: "Numbers",
         abbreviation: "Num",
-        regex: "Num(?:bers)?",
+        regex: "N(?:umbers|um|u|m|b)",
         testament: "Old",
         chapters: [54, 34, 51, 49, 31, 27, 89, 26, 23, 36, 35, 16, 33, 45, 41, 50, 13, 32, 22, 29, 35, 41, 30, 25, 18, 65, 23, 31, 40, 16, 54, 42, 56, 29, 34, 13]
       ),
@@ -40,7 +40,7 @@ module BibleBot
         id: 5,
         name: "Deuteronomy",
         abbreviation: "Deut",
-        regex: "Deut(?:eronomy)?",
+        regex: "D(?:euteronomy|eut|e|t)",
         testament: "Old",
         chapters: [46, 37, 29, 49, 33, 25, 26, 20, 29, 22, 32, 32, 18, 29, 23, 22, 20, 22, 21, 20, 23, 30, 25, 22, 19, 19, 26, 68, 29, 20, 30, 52, 29, 12]
       ),
@@ -48,7 +48,7 @@ module BibleBot
         id: 6,
         name: "Joshua",
         abbreviation: "Josh",
-        regex: "Josh(?:ua)?",
+        regex: "J(?:oshua|osh|os|sh)",
         testament: "Old",
         chapters: [18, 24, 17, 24, 15, 27, 26, 35, 27, 43, 23, 24, 33, 15, 63, 10, 18, 28, 51, 9, 45, 34, 16, 33]
       ),
@@ -56,7 +56,7 @@ module BibleBot
         id: 7,
         name: "Judges",
         abbreviation: "Judg",
-        regex: "Judg(?:es)?",
+        regex: "J(?:udges|udg|dg|g|dgs)",
         testament: "Old",
         chapters: [36, 23, 31, 24, 31, 40, 25, 35, 57, 18, 40, 15, 25, 20, 20, 31, 13, 31, 30, 48, 25]
       ),
@@ -64,7 +64,7 @@ module BibleBot
         id: 8,
         name: "Ruth",
         abbreviation: "Ruth",
-        regex: "Ruth",
+        regex: "R(?:uth|u|th)",
         testament: "Old",
         chapters: [22, 23, 18, 22]
       ),
@@ -72,7 +72,7 @@ module BibleBot
         id: 9,
         name: "1 Samuel",
         abbreviation: "1Sam",
-        regex: "(?:1|I)(?:\\s)?Sam(?:uel)?",
+        regex: "(?:1|1st|I|First)(?:\\s)?S(?:amuel|am|m)",
         testament: "Old",
         chapters: [28, 36, 21, 22, 12, 21, 17, 22, 27, 27, 15, 25, 23, 52, 35, 23, 58, 30, 24, 42, 15, 23, 29, 22, 44, 25, 12, 25, 11, 31, 13]
       ),
@@ -80,7 +80,7 @@ module BibleBot
         id: 10,
         name: "2 Samuel",
         abbreviation: "2Sam",
-        regex: "(?:2|II)(?:\\s)?Sam(?:uel)?",
+        regex: "(?:2|2nd|II|Second)(?:\\s)?S(?:amuel|am|m)",
         testament: "Old",
         chapters: [27, 32, 39, 12, 25, 23, 29, 18, 13, 19, 27, 31, 39, 33, 37, 23, 29, 33, 43, 26, 22, 51, 39, 25]
       ),
@@ -288,7 +288,7 @@ module BibleBot
         id: 36,
         name: "Zephaniah",
         abbreviation: "Zeph",
-        regex: "Zeph(?:aniah)?",
+        regex: "Z(?:ephaniah|eph|ep|p)",
         testament: "Old",
         chapters: [18, 15, 20]
       ),
