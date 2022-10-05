@@ -320,7 +320,7 @@ module BibleBot
         id: 40,
         name: "Matthew",
         abbreviation: "Matt",
-        regex: "M(?:at)?t(?:hew)?",
+        regex: "M(?:atthew|t|at|att)",
         testament: "New",
         chapters: [25, 23, 17, 25, 48, 34, 29, 34, 38, 42, 30, 50, 58, 36, 39, 28, 27, 35, 30, 34, 46, 46, 39, 51, 46, 75, 66, 20]
       ),
@@ -328,7 +328,7 @@ module BibleBot
         id: 41,
         name: "Mark",
         abbreviation: "Mark",
-        regex: "M(?:ar)?k",
+        regex: "M(?:k|ark)",
         testament: "New",
         chapters: [45, 28, 35, 41, 43, 56, 37, 38, 50, 52, 33, 44, 37, 72, 47, 20]
       ),
