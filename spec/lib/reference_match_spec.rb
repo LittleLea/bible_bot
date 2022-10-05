@@ -9,6 +9,8 @@ describe BibleBot::ReferenceMatch do
       {ref: "John 1:1 is the first first but Romans 8:9-10 is another.", expected: ["John 1:1", "Romans 8:9-10"]},
       {ref: "When Fiery Trials Come Genesis 35:16-29 Part 1", expected: ["Genesis 35:16-29"]},
       {ref: "No book to see here 4:5", expected: []},
+      {ref: "Job 40- Psalms 2", expected: ["Job 40-Psalm 2"]},
+      {ref: "Nehemiah 13- Esther 4", expected: ["Nehemiah 13-Esther 4"]},
       {ref: "Rom 1:6", expected: ["Romans 1:6"]},
       {ref: "Romans 1:6", expected: ["Romans 1:6"]},
       {ref: "Rm 1:8", expected: ["Romans 1:8"]},
@@ -86,7 +88,6 @@ describe BibleBot::ReferenceMatch do
       {ref: "2 Chron 1:1", expected: ["2 Chronicles 1:1"]},
       {ref: "Ezra 1:1", expected: ["Ezra 1:1"]},
       {ref: "Ezr 1:1", expected: ["Ezra 1:1"]},
-      {ref: "Ez 1:1", expected: ["Ezra 1:1"]},
       {ref: "Nehemiah 1:1", expected: ["Nehemiah 1:1"]},
       {ref: "Neh 1:1", expected: ["Nehemiah 1:1"]},
       {ref: "Ne 1:1", expected: ["Nehemiah 1:1"]},
@@ -209,7 +210,9 @@ describe BibleBot::ReferenceMatch do
       {ref: "Jude 1:1", expected: ["Jude 1:1"]},
       {ref: "Revelation 1:1", expected: ["Revelation 1:1"]},
       {ref: "Rev 1:1", expected: ["Revelation 1:1"]},
-      {ref: "Genesis 13:11b-12", expected: ["Genesis 13:11-12"]}
+      {ref: "Genesis 13:11b-12", expected: ["Genesis 13:11-12"]},
+      {ref: "Lamentations 5- Ezekiel 3", expected: ["Lamentations 5-Ezekiel 3"]},
+      {ref: "Hosea 12- Joel 1", expected: ['Hosea 12-Joel 1']},
     ]
 
     test_cases.each do |t|

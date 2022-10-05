@@ -120,7 +120,7 @@ module BibleBot
         id: 15,
         name: "Ezra",
         abbreviation: "Ezra",
-        regex: "Ez(?:ra|r)?",
+        regex: "Ez(?:ra|r)",
         testament: "Old",
         chapters: [11, 70, 13, 24, 17, 22, 28, 36, 15, 44]
       ),
@@ -192,7 +192,7 @@ module BibleBot
         id: 24,
         name: "Jeremiah",
         abbreviation: "Jer",
-        regex: "J(?:eremiah|e|er|r)?",
+        regex: "J(?:eremiah|e|er|r)",
         testament: "Old",
         chapters: [19, 37, 25, 31, 31, 30, 34, 22, 26, 25, 23, 17, 27, 22, 21, 21, 27, 23, 15, 18, 14, 30, 40, 10, 38, 24, 22, 17, 32, 24, 40, 44, 26, 22, 19, 32, 21, 28, 18, 16, 18, 22, 13, 30, 5, 28, 7, 47, 39, 46, 64, 34]
       ),
