@@ -34,6 +34,7 @@ module BibleBot
       @book = book
       @chapter_number = chapter_number
       @verse_number = verse_number
+      @id = nil
     end
 
     # Returns an Integer in the from of

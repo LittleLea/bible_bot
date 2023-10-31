@@ -2,6 +2,9 @@ module BibleBot
   # Represents one of the 66 books in the bible (Genesis - Revelation).
   # You should never need to initialize a Book, they are initialized in {Bible}.
   class Book
+    NULL = Object.new.freeze
+    private_constant :NULL
+
     attr_reader :id # @return [Integer]
     attr_reader :name # @return [String]
     attr_reader :abbreviation # @return [String]
@@ -39,6 +42,10 @@ module BibleBot
       @chapters = chapters
       @testament = testament
       @regex_matcher = Regexp.new('\b'+regex+'\b', Regexp::IGNORECASE).freeze
+      @reference = nil
+      @first_verse = nil
+      @last_verse = nil
+      @next_book = NULL
     end
 
     # @return [String]
@@ -77,7 +84,7 @@ module BibleBot
 
     # @return [Book, nil]
     def next_book
-      return @next_book if defined? @next_book
+      return @next_book unless @next_book == NULL
       @next_book = Book.find_by_id(id + 1)
     end
   end
