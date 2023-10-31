@@ -57,6 +57,7 @@ module BibleBot
     def initialize(start_verse:, end_verse: nil)
       @start_verse = start_verse
       @end_verse   = end_verse || start_verse
+      @verses = nil
     end
 
     # Returns a formatted string of the {Reference}.
@@ -124,7 +125,7 @@ module BibleBot
     #
     # @return [Array<Verse>]
     def verses
-      return @verses if defined? @verses
+      return @verses if @verses
 
       @verses = []
       return @verses unless valid?
