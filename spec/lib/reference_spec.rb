@@ -154,4 +154,33 @@ describe BibleBot::Reference do
       end
     end
   end
+
+  describe 'self.normalize_by_chapter' do
+    subject { described_class.normalize_by_chapter(input) }
+
+    let(:input) do
+      'John 1-3; Genesis 1:14-2:3, John 3:16; Matt 1:1-8; Judges 21:5 - 1 Samuel 2:10'
+    end
+
+    let(:output) do
+      [
+        'John 1',
+        'John 2',
+        'John 3',
+        'Genesis 1:14-31',
+        'Genesis 2:1-3',
+        'John 3:16',
+        'Matthew 1:1-8',
+        'Judges 21:5-25',
+        'Ruth 1',
+        'Ruth 2',
+        'Ruth 3',
+        'Ruth 4',
+        '1 Samuel 1',
+        '1 Samuel 2:1-10'
+      ]
+    end
+
+    it { is_expected.to eq(output) }
+  end
 end

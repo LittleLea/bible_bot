@@ -28,6 +28,36 @@ module BibleBot
       map(&:formatted).join('; ') unless empty?
     end
 
+    # Returns an array of BibleBot::Reference objects, where each reference contains
+    # the verses of just 1 chapter.
+    #
+    # @return [BibleBot::References]
+    def chapters
+      strings = flat_map do |reference|
+        verses = reference.verses + [nil]
+
+        new_references = []
+        start = nil
+        previous = nil
+
+        verses.each do |verse|
+          start ||= verse
+
+          if verse.nil? || start.book != verse.book || start.chapter_number != verse.chapter_number
+            reference = Reference.new(start_verse: start, end_verse: previous)
+            new_references << reference
+            start = verse
+          end
+
+          previous = verse
+        end
+
+        next new_references
+      end
+
+      self.class.new(strings)
+    end
+
     # All if the string ids of the verses in the references.
     #
     # @return [String]

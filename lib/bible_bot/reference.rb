@@ -47,9 +47,21 @@ module BibleBot
     # @return [String]
     # @example
     #   BibleBot::Reference.normalize(' Ps  1; Gen 1 -2')
-    #   #=> 'Psalm 1, Genesis 1-2'
+    #   #=> 'Psalm 1; Genesis 1-2'
     def self.normalize(text)
       self.parse(text).formatted
+    end
+
+    # Returns an array of string scripture references, where each reference contains
+    # the verses of just 1 chapter.
+    #
+    # @param text [String] ex: ' Ps  1; Gen 1:4-2:6'
+    # @return [Array<String>]
+    # @example
+    #   BibleBot::Reference.normalize_by_chapter(' Ps  1; Gen 1:4-2:6')
+    #   #=> 'Psalm 1; '
+    def self.normalize_by_chapter(text)
+      self.parse(text).chapters.map(&:formatted)
     end
 
     # @param start_verse [Verse]
