@@ -1,6 +1,3 @@
-# Support gems
-require 'pry'
-
 # Gem under test
 require 'bible_bot'
 

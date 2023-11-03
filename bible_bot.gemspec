@@ -18,8 +18,4 @@ Gem::Specification.new do |spec|
   spec.test_files    = []
   spec.require_paths = ["lib"]
   spec.extra_rdoc_files = ['LICENSE', 'README.md']
-
-  spec.add_development_dependency 'rspec', '~> 3.5.0'
-  spec.add_development_dependency 'pry'
-  spec.add_development_dependency 'irb'
 end
