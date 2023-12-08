@@ -14,7 +14,7 @@ describe BibleBot do
     test_cases = [
       {ref: "Tob 1:1", expected: ["Tobit 1:1"]},
       {ref: "Judith 1:2", expected: ["Judith 1:2"]},
-      {ref: "Ecclus 1:8", expected: ["Ecclesiasticus 1:8"]},
+      {ref: "Ecclus 1:8", expected: ["Sirach (Ecclesiasticus) 1:8"]},
       {ref: "Ode 151:2", expected: ["Ode 151:2"]},
     ]
 

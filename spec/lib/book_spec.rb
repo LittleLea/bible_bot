@@ -46,6 +46,28 @@ describe BibleBot::Book do
     end
   end
 
+  describe "find_by_dbl_code" do
+    [
+      {name: "GEN", expected: "Genesis"},
+      {name: "PSA", expected: "Psalms"},
+      {name: "REV", expected: "Revelation"},
+      {name: nil, expected: nil},
+    ].each do |t|
+      context "name=#{t[:name]}" do
+        it "It finds #{t[:expected]}" do
+          book = described_class.find_by_dbl_code(t[:name])
+
+          if t[:expected] == nil
+            expect(book).to be nil
+          else
+            expect(book).to be_a BibleBot::Book
+            expect(book.name).to eq t[:expected]
+          end
+        end
+      end
+    end
+  end
+
   describe "string_id" do
     it "returns the book's string id" do
       book = BibleBot::Book.find_by_id(53)

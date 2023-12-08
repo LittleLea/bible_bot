@@ -8,6 +8,7 @@ module BibleBot
     attr_reader :id # @return [Integer]
     attr_reader :name # @return [String]
     attr_reader :abbreviation # @return [String]
+    attr_reader :dbl_code # @return [String]
     attr_reader :regex # @return [String]
     attr_reader :regex_matcher # @return [Regexp]
     attr_reader :chapters # @return [Array<Integer>]
@@ -26,6 +27,16 @@ module BibleBot
       Bible.books.detect { |book| book.name.casecmp?(name) || book.regex_matcher.match?(name) }
     end
 
+    # Find by the DBL Code defined in {Bible}.
+    #
+    # @param code [String]
+    # @return [Book]
+    def self.find_by_dbl_code(code)
+      return nil if code.nil? || code.empty?
+
+      Bible.books.detect { |book| book.dbl_code == code }
+    end
+
     # Find by the Book ID defined in {Bible}.
     #
     # @param id [Integer]
@@ -34,10 +45,11 @@ module BibleBot
       Bible.books.find { |book| book.id == id }
     end
 
-    def initialize(id:, name:, abbreviation:, regex:, chapters: [] , testament:)
+    def initialize(id:, name:, abbreviation:, dbl_code:, regex:, chapters: [] , testament:)
       @id = id
       @name = name
       @abbreviation = abbreviation
+      @dbl_code = dbl_code
       @regex = regex
       @chapters = chapters
       @testament = testament
