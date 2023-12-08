@@ -369,7 +369,7 @@ module BibleBot
         id: 41,
         name: "Mark",
         abbreviation: "Mark",
-        dbl_code: "MAT",
+        dbl_code: "MRK",
         regex: "M(?:k|ark)",
         testament: "New",
         chapters: [45, 28, 35, 41, 43, 56, 37, 38, 50, 52, 33, 44, 37, 72, 47, 20]
