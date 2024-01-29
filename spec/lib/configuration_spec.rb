@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe BibleBot do
 
-  describe "scan with deuterocanonical content enabled" do
+  describe "scan with apocryphal content enabled" do
     before(:each) do
-      BibleBot.include_deuterocanonical_content = true
+      BibleBot.include_apocryphal_content = true
     end
 
     it "has a config" do
-      expect(BibleBot.include_deuterocanonical_content?).to eq true
+      expect(BibleBot.include_apocryphal_content?).to eq true
     end
 
     test_cases = [
@@ -25,19 +25,19 @@ describe BibleBot do
       end
 
       it "Can parse \"giberish 84 #{t[:ref]} foo bar\"" do
-        BibleBot.include_deuterocanonical_content = true
+        BibleBot.include_apocryphal_content = true
         expect( ReferenceMatch.scan( "giberish 84 #{t[:ref]} foo bar" ).map {|rm| rm.reference.formatted }).to eq t[:expected]
       end
     end
   end
 
-  describe "scan with deuterocanonical content disabled" do
+  describe "scan with apocryphal content disabled" do
     before(:each) do
-      BibleBot.include_deuterocanonical_content = false
+      BibleBot.include_apocryphal_content = false
     end
 
     it "has a config" do
-      expect(BibleBot.include_deuterocanonical_content?).to eq false
+      expect(BibleBot.include_apocryphal_content?).to eq false
     end
 
     test_cases = [

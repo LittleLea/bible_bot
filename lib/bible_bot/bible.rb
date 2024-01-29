@@ -601,7 +601,7 @@ module BibleBot
       )
     ]
 
-    @@deuterocanonical_books = [
+    @@apocryphal_books = [
       Book.new(
         id: 101,
         name: "Tobit",
@@ -777,8 +777,8 @@ module BibleBot
     ]
 
     def self.books
-      if BibleBot.include_deuterocanonical_content?
-        @@books + @@deuterocanonical_books
+      if BibleBot.include_apocryphal_content?
+        @@books + @@apocryphal_books
       else
         @@books
       end

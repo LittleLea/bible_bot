@@ -10,7 +10,7 @@ require "bible_bot/references"
 
 module BibleBot
   DEFAULTS = {
-    include_deuterocanonical_content: false
+    include_apocryphal_content: false
   }
 
   def self.options
@@ -25,18 +25,18 @@ module BibleBot
   # Configuration for BibleBot, use like:
   #
   #   BibleBot.configure do |config|
-  #     config.include_deuterocanonical_content = true
+  #     config.include_apocryphal_content = true
   #   end
   def self.configure
     yield(options)
   end
 
-  def self.include_deuterocanonical_content?
-    !!self.options.include_deuterocanonical_content
+  def self.include_apocryphal_content?
+    !!self.options.include_apocryphal_content
   end
 
-  def self.include_deuterocanonical_content=(inc)
-    self.options.include_deuterocanonical_content = (inc == true)
+  def self.include_apocryphal_content=(inc)
+    self.options.include_apocryphal_content = (inc == true)
 
     # We need to reset the stored regexps because they take content into account.
     BibleBot::Bible.reset_regular_expressions
