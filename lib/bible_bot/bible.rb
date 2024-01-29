@@ -608,7 +608,7 @@ module BibleBot
         abbreviation: "Tob",
         dbl_code: "TOB",
         regex: "Tob(?:it)?",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [22, 14, 17, 21, 22, 18, 17, 21, 6, 14, 18, 22, 18, 15],
       ),
       Book.new(
@@ -617,7 +617,7 @@ module BibleBot
         abbreviation: "Jth",
         dbl_code: "JDT",
         regex: "(?:Ju?d?i?th?)",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [16, 28, 10, 15, 24, 21, 32, 36, 14, 23, 23, 20, 20, 19, 14, 25],
       ),
       Book.new(
@@ -626,7 +626,7 @@ module BibleBot
         abbreviation: "Add Esth",
         dbl_code: "ESG",
         regex: "(?:((Add\s?|(The\s)?Rest\sof\s|A))Est?h?e?r?)",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 8, 30, 16, 24, 10],
       ),
       Book.new(
@@ -635,7 +635,7 @@ module BibleBot
         abbreviation: "Wis",
         dbl_code: "WIS",
         regex: "(?:(Wi?sd?\.?(\sof\s)?(Sol|om)?))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [16, 24, 19, 20, 23, 25, 30, 21, 18, 21, 26, 27, 19, 31, 19, 29, 21, 25, 22],
       ),
       Book.new(
@@ -644,7 +644,7 @@ module BibleBot
         abbreviation: "Sir",
         dbl_code: "SIR",
         regex: "(?:(Sir(?:ach)?)|Ecclus|Ecclesiasticus)",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [29, 18, 30, 31, 17, 37, 36, 19, 18, 30, 34, 18, 25, 27, 20, 28, 27, 33, 26, 30, 28, 27, 27, 31, 25, 20, 30, 26, 28, 25, 31, 24, 33, 26, 24, 27, 30, 34, 35, 30, 24, 25, 35, 23, 26, 20, 25, 25, 16, 29, 30],
       ),
       Book.new(
@@ -653,7 +653,7 @@ module BibleBot
         abbreviation: "Bar",
         dbl_code: "BAR",
         regex: "Bar(?:uch)?",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [22, 35, 38, 37, 9, 72],
       ),
       Book.new(
@@ -662,7 +662,7 @@ module BibleBot
         abbreviation: "Ep Jer",
         dbl_code: "LJE",
         regex: "(?:((Le?t?t?e?r?|Ep)(\.\s|\sof\s)?Jer?))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [73],
       ),
       Book.new(
@@ -671,7 +671,7 @@ module BibleBot
         abbreviation: "Sg of 3 Childr",
         dbl_code: "S3Y",
         regex: "(?:(((The\s)?(So?n?g)(\.?\s?o?f?\s?)(the\s)?(3|Thr).*))|((Pr)?.*Aza?r?))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [],
       ),
       Book.new(
@@ -680,7 +680,7 @@ module BibleBot
         abbreviation: "Sus",
         dbl_code: "SUS",
         regex: "(?:(Sus))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [64],
       ),
       Book.new(
@@ -689,7 +689,7 @@ module BibleBot
         abbreviation: "Bel and Dr",
         dbl_code: "BEL",
         regex: "(?:(Bel))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [42],
       ),
       Book.new(
@@ -699,7 +699,7 @@ module BibleBot
         dbl_code: "1MA",
         #regex: "(?:((1s?t?|^I{1}|First)\s?Ma?c?))",
         regex: "(?:1|I)(?:\\s)?Macc(?:abees)?",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [63, 70, 59, 61, 68, 63, 50, 32, 73, 89, 74, 53, 53, 49, 41, 24],
       ),
       Book.new(
@@ -708,7 +708,7 @@ module BibleBot
         abbreviation: "2 Macc",
         dbl_code: "2MA",
         regex: "(?:((2n?d?|^I{2}|Second)\s?Ma?c?))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [36, 32, 40, 50, 27, 31, 42, 36, 29, 38, 38, 46, 26, 46, 39],
       ),
       Book.new(
@@ -717,7 +717,7 @@ module BibleBot
         abbreviation: "3 Macc",
         dbl_code: "3MA",
         regex: "(?:((3r?d?|^I{3}|Third)\s?Ma?c?))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [29, 33, 30, 21, 51, 41, 23],
       ),
       Book.new(
@@ -726,7 +726,7 @@ module BibleBot
         abbreviation: "4 Macc",
         dbl_code: "4MA",
         regex: "(?:((4t?h?|IV|Fourth)\s?Ma?c?))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [35, 24, 21, 26, 38, 35, 23, 29, 32, 21, 27, 19, 27, 20, 32, 25, 24, 24],
       ),
       Book.new(
@@ -735,7 +735,7 @@ module BibleBot
         abbreviation: "1 Esd",
         dbl_code: "1ES",
         regex: "(?:((1s?t?|^I{1}|First)\s?Esd?))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [58, 30, 24, 63, 73, 34, 15, 96, 55],
       ),
       Book.new(
@@ -744,7 +744,7 @@ module BibleBot
         abbreviation: "2 Esd",
         dbl_code: "2ES",
         regex: "(?:((2n?d?|^I{2}|Second)\s?Esd?))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [40, 48, 36, 52, 56, 59, 140, 63, 47, 59, 46, 51, 58, 48, 63, 78],
       ),
       Book.new(
@@ -753,7 +753,7 @@ module BibleBot
         abbreviation: "Pr of Man",
         dbl_code: "MAN",
         regex: "(?:(Pr?.*Man?))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [15],
       ),
       Book.new(
@@ -762,7 +762,7 @@ module BibleBot
         abbreviation: "Add Ps",
         dbl_code: "PS2",
         regex: "(?:(Add.*Ps))",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7],
       ),
       Book.new(
@@ -771,7 +771,7 @@ module BibleBot
         abbreviation: "Ode",
         dbl_code: "ODA",
         regex: "Ode",
-        testament: "",
+        testament: "Apocrypha",
         chapters: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7],
       ),
     ]
