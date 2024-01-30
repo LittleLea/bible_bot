@@ -607,7 +607,7 @@ module BibleBot
         name: "Tobit",
         abbreviation: "Tob",
         dbl_code: "TOB",
-        regex: "Tob(?:it)?",
+        regex: "(?:(Tb|Tob|Tobit))",
         testament: "Apocrypha",
         chapters: [22, 14, 17, 21, 22, 18, 17, 21, 6, 14, 18, 22, 18, 15],
       ),
@@ -616,7 +616,7 @@ module BibleBot
         name: "Judith",
         abbreviation: "Jth",
         dbl_code: "JDT",
-        regex: "(?:Ju?d?i?th?)",
+        regex: "(?:(Jdt|Jth|Jdth|Judith))",
         testament: "Apocrypha",
         chapters: [16, 28, 10, 15, 24, 21, 32, 36, 14, 23, 23, 20, 20, 19, 14, 25],
       ),
@@ -625,7 +625,7 @@ module BibleBot
         name: "Additions to Esther",
         abbreviation: "Add Esth",
         dbl_code: "ESG",
-        regex: "(?:((Add\s?|(The\s)?Rest\sof\s|A))Est?h?e?r?)",
+        regex: "(?:(Add(itions)?(\\sto)?|(The\\s)?Rest\\sof|A)\\s*Est?h?e?r?)",
         testament: "Apocrypha",
         chapters: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 8, 30, 16, 24, 10],
       ),
@@ -634,7 +634,7 @@ module BibleBot
         name: "Wisdom of Solomon",
         abbreviation: "Wis",
         dbl_code: "WIS",
-        regex: "(?:(Wi?sd?\.?(\sof\s)?(Sol|om)?))",
+        regex: "(?:(Wi?sd?(om)?(\\sof\\s)?(Sol|Solomon)?))",
         testament: "Apocrypha",
         chapters: [16, 24, 19, 20, 23, 25, 30, 21, 18, 21, 26, 27, 19, 31, 19, 29, 21, 25, 22],
       ),
@@ -652,7 +652,7 @@ module BibleBot
         name: "Baruch",
         abbreviation: "Bar",
         dbl_code: "BAR",
-        regex: "Bar(?:uch)?",
+        regex: "(?:Bar(?:uch)?)",
         testament: "Apocrypha",
         chapters: [22, 35, 38, 37, 9, 72],
       ),
@@ -661,7 +661,7 @@ module BibleBot
         name: "Letter of Jeremiah", # Often placed as Baruch 6, but sometimes stands alone
         abbreviation: "Ep Jer",
         dbl_code: "LJE",
-        regex: "(?:((Le?t?t?e?r?|Ep)(\.\s|\sof\s)?Jer?))",
+        regex: "(?:(Letter of Jeremiah|Ep Jer|Let Jer|Ltr Jer|LJe))",
         testament: "Apocrypha",
         chapters: [73],
       ),
@@ -670,7 +670,7 @@ module BibleBot
         name: "Prayer of Azariah and the Song of the Three Jews", # An extension of Daniel 3... a.k.a. Prayer of Azariah
         abbreviation: "Sg of 3 Childr",
         dbl_code: "S3Y",
-        regex: "(?:(((The\s)?(So?n?g)(\.?\s?o?f?\s?)(the\s)?(3|Thr).*))|((Pr)?.*Aza?r?))",
+        regex: "(?:(?:Pr\\sAz|Prayer\\sof\\sAzariah|Azariah|(?:The\\s)?So?n?g\\s(?:of\\s)?(?:the\\s)?(?:3|Three|Thr)(?:\\s(?:Holy|Young)?\\s*(?:Childr(?:en)?|Jews))?))",
         testament: "Apocrypha",
         chapters: [68],
       ),
@@ -679,7 +679,7 @@ module BibleBot
         name: "Susanna", # A book of Daniel
         abbreviation: "Sus",
         dbl_code: "SUS",
-        regex: "(?:(Sus))",
+        regex: "(?:Sus(?:anna)?)",
         testament: "Apocrypha",
         chapters: [64],
       ),
@@ -688,7 +688,7 @@ module BibleBot
         name: "Bel and the Dragon", # A book of Daniel
         abbreviation: "Bel and Dr",
         dbl_code: "BEL",
-        regex: "(?:(Bel))",
+        regex: "(?:Bel(\\s(and\\sthe\\sDragon|and\\sDr))?)",
         testament: "Apocrypha",
         chapters: [42],
       ),
@@ -697,7 +697,7 @@ module BibleBot
         name: "1 Maccabees",
         abbreviation: "1 Macc",
         dbl_code: "1MA",
-        regex: "(?:1|I)(?:\\s)?Macc(?:abees)?",
+        regex: "(?:(1|1st|I|First)\\s*(M|Ma|Mac|Macc|Maccabees))",
         testament: "Apocrypha",
         chapters: [63, 70, 59, 61, 68, 63, 50, 32, 73, 89, 74, 53, 53, 49, 41, 24],
       ),
@@ -706,7 +706,7 @@ module BibleBot
         name: "2 Maccabees",
         abbreviation: "2 Macc",
         dbl_code: "2MA",
-        regex: "(?:((2n?d?|^I{2}|Second)\s?Ma?c?))",
+        regex: "(?:(2|2nd|II|Second)\\s*(M|Ma|Mac|Macc|Maccabees))",
         testament: "Apocrypha",
         chapters: [36, 32, 40, 50, 27, 31, 42, 36, 29, 38, 38, 46, 26, 46, 39],
       ),
@@ -715,7 +715,7 @@ module BibleBot
         name: "1 Esdras",
         abbreviation: "1 Esd",
         dbl_code: "1ES",
-        regex: "(?:((1s?t?|^I{1}|First)\s?Esd?))",
+        regex: "(?:(1|1st|I|First)\\s*(Esd|Esdr|Esdras))",
         testament: "Apocrypha",
         chapters: [58, 30, 24, 63, 73, 34, 15, 96, 55],
       ),
@@ -724,25 +724,25 @@ module BibleBot
         name: "Prayer of Manasseh",
         abbreviation: "Pr of Man",
         dbl_code: "MAN",
-        regex: "(?:(Pr?.*Man?))",
+        regex: "(?:(Prayer\\sof\\sManasseh|Pr\\sof\\sMan|PMa|Prayer\\sof\\sManasses))",
         testament: "Apocrypha",
         chapters: [15],
       ),
       Book.new(
         id: 115,
-        name: "Additional Psalm", # Psalm 151
-        abbreviation: "Add Ps",
+        name: "Psalm 151",
+        abbreviation: "Psalm 151",
         dbl_code: "PS2",
-        regex: "(?:(Add.*Ps))",
+        regex: "(?:Ps(?:alms|alm|s|m|a)?\\s151)",
         testament: "Apocrypha",
-        chapters: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7],
+        chapters: [7],
       ),
       Book.new(
         id: 116,
         name: "3 Maccabees",
         abbreviation: "3 Macc",
         dbl_code: "3MA",
-        regex: "(?:((3r?d?|^I{3}|Third)\s?Ma?c?))",
+        regex: "(?:(3|3rd|III|Third)\\s*(M|Ma|Mac|Macc|Maccabees))",
         testament: "Apocrypha",
         chapters: [29, 33, 30, 21, 51, 41, 23],
       ),
@@ -751,7 +751,7 @@ module BibleBot
         name: "2 Esdras",
         abbreviation: "2 Esd",
         dbl_code: "2ES",
-        regex: "(?:((2n?d?|^I{2}|Second)\s?Esd?))",
+        regex: "(?:(2|2nd|II|Second)\\s*(Esd|Esdr|Esdras))",
         testament: "Apocrypha",
         chapters: [40, 48, 36, 52, 56, 59, 140, 63, 47, 59, 46, 51, 58, 48, 63, 78],
       ),
@@ -760,7 +760,7 @@ module BibleBot
         name: "4 Maccabees",
         abbreviation: "4 Macc",
         dbl_code: "4MA",
-        regex: "(?:((4t?h?|IV|Fourth)\s?Ma?c?))",
+        regex: "(?:(4|4th|IV|Fourth)\\s*(M|Ma|Mac|Macc|Maccabees))",
         testament: "Apocrypha",
         chapters: [35, 24, 21, 26, 38, 35, 23, 29, 32, 21, 27, 19, 27, 20, 32, 25, 24, 24],
       ),
@@ -768,7 +768,9 @@ module BibleBot
 
     def self.books
       if BibleBot.include_apocryphal_content?
-        @@books + @@apocryphal_books
+        # Apocryphal books have to come first, since there's some overlap in the regex, but
+        # the apocryphal books are more verbose. "Song", "Esther", "Psalm"
+        @@apocryphal_books + @@books
       else
         @@books
       end
