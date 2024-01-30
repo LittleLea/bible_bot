@@ -640,7 +640,7 @@ module BibleBot
       ),
       Book.new(
         id: 105,
-        name: "Sirach (Ecclesiasticus)", # a.k.a. Ecclesiasticus
+        name: "Sirach", # a.k.a. Ecclesiasticus
         abbreviation: "Sir",
         dbl_code: "SIR",
         regex: "(?:(Sir(?:ach)?)|Ecclus|Ecclesiasticus)",
@@ -667,12 +667,12 @@ module BibleBot
       ),
       Book.new(
         id: 108,
-        name: "Song of Three Youths", # An extension of Daniel 3... a.k.a. Prayer of Azariah
+        name: "Prayer of Azariah and the Song of the Three Jews", # An extension of Daniel 3... a.k.a. Prayer of Azariah
         abbreviation: "Sg of 3 Childr",
         dbl_code: "S3Y",
         regex: "(?:(((The\s)?(So?n?g)(\.?\s?o?f?\s?)(the\s)?(3|Thr).*))|((Pr)?.*Aza?r?))",
         testament: "Apocrypha",
-        chapters: [],
+        chapters: [68],
       ),
       Book.new(
         id: 109,
@@ -697,7 +697,6 @@ module BibleBot
         name: "1 Maccabees",
         abbreviation: "1 Macc",
         dbl_code: "1MA",
-        #regex: "(?:((1s?t?|^I{1}|First)\s?Ma?c?))",
         regex: "(?:1|I)(?:\\s)?Macc(?:abees)?",
         testament: "Apocrypha",
         chapters: [63, 70, 59, 61, 68, 63, 50, 32, 73, 89, 74, 53, 53, 49, 41, 24],
@@ -713,24 +712,6 @@ module BibleBot
       ),
       Book.new(
         id: 113,
-        name: "3 Maccabees",
-        abbreviation: "3 Macc",
-        dbl_code: "3MA",
-        regex: "(?:((3r?d?|^I{3}|Third)\s?Ma?c?))",
-        testament: "Apocrypha",
-        chapters: [29, 33, 30, 21, 51, 41, 23],
-      ),
-      Book.new(
-        id: 114,
-        name: "4 Maccabees",
-        abbreviation: "4 Macc",
-        dbl_code: "4MA",
-        regex: "(?:((4t?h?|IV|Fourth)\s?Ma?c?))",
-        testament: "Apocrypha",
-        chapters: [35, 24, 21, 26, 38, 35, 23, 29, 32, 21, 27, 19, 27, 20, 32, 25, 24, 24],
-      ),
-      Book.new(
-        id: 115,
         name: "1 Esdras",
         abbreviation: "1 Esd",
         dbl_code: "1ES",
@@ -739,16 +720,7 @@ module BibleBot
         chapters: [58, 30, 24, 63, 73, 34, 15, 96, 55],
       ),
       Book.new(
-        id: 116,
-        name: "2 Esdras",
-        abbreviation: "2 Esd",
-        dbl_code: "2ES",
-        regex: "(?:((2n?d?|^I{2}|Second)\s?Esd?))",
-        testament: "Apocrypha",
-        chapters: [40, 48, 36, 52, 56, 59, 140, 63, 47, 59, 46, 51, 58, 48, 63, 78],
-      ),
-      Book.new(
-        id: 117,
+        id: 114,
         name: "Prayer of Manasseh",
         abbreviation: "Pr of Man",
         dbl_code: "MAN",
@@ -757,8 +729,8 @@ module BibleBot
         chapters: [15],
       ),
       Book.new(
-        id: 118,
-        name: "Additional Psalm",
+        id: 115,
+        name: "Additional Psalm", # Psalm 151
         abbreviation: "Add Ps",
         dbl_code: "PS2",
         regex: "(?:(Add.*Ps))",
@@ -766,13 +738,31 @@ module BibleBot
         chapters: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7],
       ),
       Book.new(
-        id: 119,
-        name: "Ode",
-        abbreviation: "Ode",
-        dbl_code: "ODA",
-        regex: "Ode",
+        id: 116,
+        name: "3 Maccabees",
+        abbreviation: "3 Macc",
+        dbl_code: "3MA",
+        regex: "(?:((3r?d?|^I{3}|Third)\s?Ma?c?))",
         testament: "Apocrypha",
-        chapters: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7],
+        chapters: [29, 33, 30, 21, 51, 41, 23],
+      ),
+      Book.new(
+        id: 117,
+        name: "2 Esdras",
+        abbreviation: "2 Esd",
+        dbl_code: "2ES",
+        regex: "(?:((2n?d?|^I{2}|Second)\s?Esd?))",
+        testament: "Apocrypha",
+        chapters: [40, 48, 36, 52, 56, 59, 140, 63, 47, 59, 46, 51, 58, 48, 63, 78],
+      ),
+      Book.new(
+        id: 118,
+        name: "4 Maccabees",
+        abbreviation: "4 Macc",
+        dbl_code: "4MA",
+        regex: "(?:((4t?h?|IV|Fourth)\s?Ma?c?))",
+        testament: "Apocrypha",
+        chapters: [35, 24, 21, 26, 38, 35, 23, 29, 32, 21, 27, 19, 27, 20, 32, 25, 24, 24],
       ),
     ]
 
