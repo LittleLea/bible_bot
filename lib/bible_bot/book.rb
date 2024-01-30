@@ -45,7 +45,7 @@ module BibleBot
       Bible.books.find { |book| book.id == id }
     end
 
-    def initialize(id:, name:, abbreviation:, dbl_code:, regex:, chapters: [] , testament:)
+    def initialize(id:, name:, abbreviation:, dbl_code:, regex:, testament:, chapters: [])
       @id = id
       @name = name
       @abbreviation = abbreviation
