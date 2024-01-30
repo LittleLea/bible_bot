@@ -12,6 +12,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/lightstock/bible_bot"
   spec.license       = "MIT"
 
+  spec.required_ruby_version = '>= 3.0'
+
   spec.files         = Dir.glob('{lib}/**/*', File::FNM_DOTMATCH)
   spec.bindir        = 'exe'
   spec.executables   = []
