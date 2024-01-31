@@ -1,9 +1,23 @@
+# frozen_string_literal: true
+
 module BibleBot
-  # Represents one of the 66 books in the bible (Genesis - Revelation).
+  # Represents one of the 66 books in the bible (Genesis - Revelation) or Apocryphal books.
   # You should never need to initialize a Book, they are initialized in {Bible}.
   class Book
     NULL = Object.new.freeze
     private_constant :NULL
+
+    APOCRYPHA = 'Apocrypha'
+    private_constant :APOCRYPHA
+
+    NEW_TESTAMENT = 'New'
+    private_constant :NEW_TESTAMENT
+
+    OLD_TESTAMENT = 'Old'
+    private_constant :OLD_TESTAMENT
+
+    TESTAMENTS = [OLD_TESTAMENT, NEW_TESTAMENT, APOCRYPHA].freeze
+    private_constant :TESTAMENTS
 
     attr_reader :id # @return [Integer]
     attr_reader :name # @return [String]
@@ -45,7 +59,9 @@ module BibleBot
       Bible.books.find { |book| book.id == id }
     end
 
-    def initialize(id:, name:, abbreviation:, dbl_code:, regex:, chapters: [] , testament:)
+    def initialize(id:, name:, abbreviation:, dbl_code:, regex:, testament:, chapters: [])
+      raise "Unknown testament: #{testament.inspect}" unless TESTAMENTS.include?(testament)
+
       @id = id
       @name = name
       @abbreviation = abbreviation
@@ -58,6 +74,13 @@ module BibleBot
       @first_verse = nil
       @last_verse = nil
       @next_book = NULL
+      @apocryphal = testament == APOCRYPHA
+    end
+
+    # Whether or not the book is one of the original 66
+    # @return [Boolean]
+    def apocryphal?
+      @apocryphal
     end
 
     # @return [String]

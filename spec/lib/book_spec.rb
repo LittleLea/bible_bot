@@ -82,4 +82,34 @@ describe BibleBot::Book do
       expect(book.reference.inspect).to include(start_verse: "1 John 1:1", end_verse: "1 John 5:21")
     end
   end
+
+  describe "apocryphal?" do
+    subject { book.apocryphal? }
+
+    let(:book) do
+      BibleBot::Book.new(
+        id: 999,
+        name: 'Foo',
+        abbreviation: 'Foo',
+        dbl_code: 'FOO',
+        regex: 'foo',
+        testament:
+      )
+    end
+
+    context 'when old testament' do
+      let(:testament) { 'Old' }
+      it { is_expected.to eq(false) }
+    end
+
+    context 'when new testament' do
+      let(:testament) { 'New' }
+      it { is_expected.to eq(false) }
+    end
+
+    context 'when apocryphal' do
+      let(:testament) { 'Apocrypha' }
+      it { is_expected.to eq(true) }
+    end
+  end
 end
