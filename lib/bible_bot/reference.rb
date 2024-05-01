@@ -72,6 +72,15 @@ module BibleBot
       @verses = nil
     end
 
+    # Returns a boolean if the reference contains an apocryphal book
+    #
+    # @return [Boolean]
+    def contains_apocrypha?
+      # Since references are a range and apocryphal books come after non-apocryphal books,
+      # we can simply check the end verse's book to see whether it's apocryphal or not.
+      end_verse.book.apocryphal?
+    end
+
     # Returns a formatted string of the {Reference}.
     #
     # @return [String]

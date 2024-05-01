@@ -6,6 +6,45 @@ describe BibleBot::References do
 
   it { expect(references).to be_a(described_class) }
 
+  describe '#contains_apocrypha?', :with_apocrypha do
+    subject { references.contains_apocrypha? }
+
+    context 'when references start with apocrypha' do
+      let(:reference_string) { 'Tobit 1-3; Genesis 1-4' }
+      it { is_expected.to eq(true) }
+    end
+
+    context 'when references end with apocrypha' do
+      let(:reference_string) { 'Genesis 1-4; Tobit 1-3'}
+      it { is_expected.to eq(true) }
+    end
+
+    context 'when references have apocrypha in the middle' do
+      let(:reference_string) { 'Genesis 1-4; Tobit 1-2; Matthew 1-3'}
+      it { is_expected.to eq(true) }
+    end
+
+    context 'when references contain no apocrypha' do
+      let(:reference_string) { 'Genesis 1-4; Matthew 1-3'}
+      it { is_expected.to eq(false) }
+    end
+
+    context 'when references are multi-book, excluding apocrypha' do
+      let(:reference_string) { 'Genesis 1-4; Matthew 1 - John 2'}
+      it { is_expected.to eq(false) }
+    end
+
+    context 'when references are multi-book, beginning with apocrypha' do
+      let(:reference_string) { 'Genesis 1-4; Tobit 1 - Baruch 6'}
+      it { is_expected.to eq(true) }
+    end
+
+    context 'when references are multi-book, ending with apocrypha' do
+      let(:reference_string) { 'Genesis 1-4; Jude 1 - Baruch 6'}
+      it { is_expected.to eq(true) }
+    end
+  end
+
   describe '#single_chapter?' do
     subject { references.single_chapter? }
 
