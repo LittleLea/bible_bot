@@ -28,6 +28,20 @@ module BibleBot
       map(&:formatted).join('; ') unless empty?
     end
 
+    # Returns a boolean if any of the references contain an apocryphal book
+    #
+    # @return [Boolean]
+    #
+    # @example
+    #   BibleBot::Reference.parse('Gen 1-2, Matt 1-3').contains_apocrypha?
+    #   #=> false
+    #
+    #   BibleBot::Reference.parse('Gen 1-2, Tob 1; Matt 1-3').contains_apocrypha?
+    #   #=> true
+    def contains_apocrypha?
+      any?(&:contains_apocrypha?)
+    end
+
     # Returns an array of BibleBot::Reference objects, where each reference contains
     # the verses of just 1 chapter.
     #
