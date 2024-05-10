@@ -70,6 +70,7 @@ module BibleBot
       @chapters = chapters
       @testament = testament
       @regex_matcher = Regexp.new('\b'+regex+'\b', Regexp::IGNORECASE).freeze
+      @chapter_string_ids = nil
       @reference = nil
       @first_verse = nil
       @last_verse = nil
@@ -103,6 +104,14 @@ module BibleBot
     # @return [Reference]
     def reference
       @reference ||= Reference.new(start_verse: start_verse, end_verse: end_verse)
+    end
+
+    # @return [Array<String>]
+    # @example
+    #   BibleBot::Book.find_by_id(39).chapter_string_ids
+    #   #=> ['malachi-001', 'malachi-002', 'malachi-003', 'malachi-004']
+    def chapter_string_ids
+      @chapter_string_ids ||= References.new([reference]).chapter_string_ids
     end
 
     # @return [Verse]

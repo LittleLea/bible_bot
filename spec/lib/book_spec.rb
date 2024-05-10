@@ -68,6 +68,15 @@ describe BibleBot::Book do
     end
   end
 
+  describe "chapter_string_ids" do
+    it "returns the array of chapter ids" do
+      book = BibleBot::Book.find_by_id(39)
+      expect(book.chapter_string_ids).to eq([
+        "malachi-001", "malachi-002", "malachi-003", "malachi-004"
+      ])
+    end
+  end
+
   describe "string_id" do
     it "returns the book's string id" do
       book = BibleBot::Book.find_by_id(53)
