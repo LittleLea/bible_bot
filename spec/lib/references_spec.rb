@@ -35,12 +35,12 @@ describe BibleBot::References do
     end
 
     context 'when references are multi-book, beginning with apocrypha' do
-      let(:reference_string) { 'Genesis 1-4; Tobit 1 - Baruch 6'}
+      let(:reference_string) { 'Genesis 1-4; Tobit 1 - Baruch 5'}
       it { is_expected.to eq(true) }
     end
 
     context 'when references are multi-book, ending with apocrypha' do
-      let(:reference_string) { 'Genesis 1-4; Jude 1 - Baruch 6'}
+      let(:reference_string) { 'Genesis 1-4; Jude 1 - Baruch 5'}
       it { is_expected.to eq(true) }
     end
   end
