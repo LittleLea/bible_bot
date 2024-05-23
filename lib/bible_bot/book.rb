@@ -114,15 +114,29 @@ module BibleBot
       @chapter_string_ids ||= References.new([reference]).chapter_string_ids
     end
 
+    # @return [Array<Integer>]
+    def verse_ids
+      @verse_ids ||= chapters
+      .flat_map.with_index do |verse_count, i|
+        chapter_number = i + 1
+
+        1.upto(verse_count).map do |verse_number|
+          verse_id(chapter_number:, verse_number:)
+        end
+      end
+    end
+
     # @return [Verse]
     def start_verse
-      @first_verse ||= Verse.from_id("#{id}001001".to_i)
+      @first_verse ||= Verse.from_id(
+        verse_id(chapter_number: 1, verse_number: 1)
+      )
     end
 
     # @return [Verse]
     def end_verse
       @last_verse ||= Verse.from_id(
-        "#{id}#{chapters.length.to_s.rjust(3, '0')}#{chapters.last.to_s.rjust(3, '0')}".to_i
+        verse_id(chapter_number: chapters.length, verse_number: chapters.last)
       )
     end
 
@@ -130,6 +144,11 @@ module BibleBot
     def next_book
       return @next_book unless @next_book == NULL
       @next_book = Book.find_by_id(id + 1)
+    end
+
+    private
+    def verse_id(chapter_number:, verse_number:)
+      Verse.integer_id(book_id: id, chapter_number:, verse_number:)
     end
   end
 end

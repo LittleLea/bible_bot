@@ -68,6 +68,16 @@ describe BibleBot::Book do
     end
   end
 
+  describe "verse_ids" do
+    it "returns an array of verse ids" do
+      book = BibleBot::Book.find_by_id(1)
+
+      expect(book.verse_ids.first).to eq(1001001)
+      expect(book.verse_ids.last).to eq(1050026)
+      expect(book.verse_ids.size).to eq(1533)
+    end
+  end
+
   describe "chapter_string_ids" do
     it "returns the array of chapter ids" do
       book = BibleBot::Book.find_by_id(39)
