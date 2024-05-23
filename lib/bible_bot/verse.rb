@@ -7,7 +7,7 @@ module BibleBot
     attr_reader :chapter_number # @return [Integer]
     attr_reader :verse_number # @return [Integer]
 
-    # Turns an Inteter into a Verse
+    # Turns an Integer into a Verse
     # For more details, see note above the `id` method.
     #
     # @param id [Integer]
