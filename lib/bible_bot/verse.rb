@@ -27,6 +27,14 @@ module BibleBot
       new(book: book, chapter_number: chapter_number, verse_number: verse_number)
     end
 
+    # @param book_id [Integer]
+    # @param chapter_number [Integer]
+    # @param verse_number [Integer]
+    # @return [Array<Integer>]
+    def self.integer_id(book_id:, chapter_number:, verse_number:)
+      "#{book_id}#{chapter_number.to_s.rjust(3, '0')}#{verse_number.to_s.rjust(3, '0')}".to_i
+    end
+
     # @param book [Book]
     # @param chapter_number [Integer]
     # @param verse_number [Integer]
@@ -52,7 +60,7 @@ module BibleBot
     #   verse.id #=> 19_105_001
     #                 #-> this represents "Psalm 105:1"
     def id
-      @id ||= "#{book.id}#{chapter_number.to_s.rjust(3, '0')}#{verse_number.to_s.rjust(3, '0')}".to_i
+      @id ||= self.class.integer_id(book_id: book.id, chapter_number:, verse_number:)
     end
 
     # @deprecated Use {id} instead
