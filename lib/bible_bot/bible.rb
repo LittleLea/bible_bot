@@ -627,7 +627,7 @@ module BibleBot
         dbl_code: "ESG",
         regex: "(?:(Add(itions)?(\\sto)?|(The\\s)?Rest\\sof|A)\\s*Est?h?e?r?)",
         testament: "Apocrypha",
-        chapters: [39, 23, 22, 47, 28, 14, 10, 41, 32, 14],
+        chapters: [0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 12, 6, 18, 19, 16, 24],
       ),
       Book.new(
         id: 104,
