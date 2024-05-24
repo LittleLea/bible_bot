@@ -654,7 +654,7 @@ module BibleBot
         dbl_code: "BAR",
         regex: "(?:Bar(?:uch)?)",
         testament: "Apocrypha",
-        chapters: [22, 35, 38, 37, 9],
+        chapters: [22, 35, 37, 37, 9],
       ),
       Book.new(
         id: 107,
