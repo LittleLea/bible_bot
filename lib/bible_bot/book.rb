@@ -69,7 +69,7 @@ module BibleBot
       @regex = regex
       @chapters = chapters
       @testament = testament
-      @regex_matcher = Regexp.new('\b'+regex+'\b', Regexp::IGNORECASE).freeze
+      @regex_matcher = Regexp.new('\A'+regex+'\z', Regexp::IGNORECASE).freeze
       @chapter_string_ids = nil
       @reference = nil
       @first_verse = nil

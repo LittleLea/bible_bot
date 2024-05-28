@@ -28,6 +28,8 @@ describe BibleBot::Book do
     [
       {name: "genesis", expected: "Genesis"},
       {name: "psalm", expected: "Psalms"},
+      {name: "Let Jer", expected: "Letter of Jeremiah"},
+      {name: "Psalms Daily", expected: nil},
       {name: "rev", expected: "Revelation"},
       {name: "nothing", expected: nil},
     ].each do |t|
