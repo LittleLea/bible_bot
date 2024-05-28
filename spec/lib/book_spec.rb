@@ -102,6 +102,36 @@ describe BibleBot::Book do
     end
   end
 
+  describe '#testament_name' do
+    subject { book.testament_name }
+
+    let(:book) do
+      BibleBot::Book.new(
+        id: 999,
+        name: 'Foo',
+        abbreviation: 'Foo',
+        dbl_code: 'FOO',
+        regex: 'foo',
+        testament:
+      )
+    end
+
+    context 'when old testament' do
+      let(:testament) { :old_testament }
+      it { is_expected.to eq('Old Testament') }
+    end
+
+    context 'when new testament' do
+      let(:testament) { :new_testament }
+      it { is_expected.to eq('New Testament') }
+    end
+
+    context 'when apocryphal' do
+      let(:testament) { :apocrypha }
+      it { is_expected.to eq('Apocrypha') }
+    end
+  end
+
   describe "apocryphal?" do
     subject { book.apocryphal? }
 
@@ -117,17 +147,17 @@ describe BibleBot::Book do
     end
 
     context 'when old testament' do
-      let(:testament) { 'Old' }
+      let(:testament) { :old_testament }
       it { is_expected.to eq(false) }
     end
 
     context 'when new testament' do
-      let(:testament) { 'New' }
+      let(:testament) { :new_testament }
       it { is_expected.to eq(false) }
     end
 
     context 'when apocryphal' do
-      let(:testament) { 'Apocrypha' }
+      let(:testament) { :apocrypha }
       it { is_expected.to eq(true) }
     end
   end

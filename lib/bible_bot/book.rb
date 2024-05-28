@@ -7,16 +7,11 @@ module BibleBot
     NULL = Object.new.freeze
     private_constant :NULL
 
-    APOCRYPHA = 'Apocrypha'
-    private_constant :APOCRYPHA
-
-    NEW_TESTAMENT = 'New'
-    private_constant :NEW_TESTAMENT
-
-    OLD_TESTAMENT = 'Old'
-    private_constant :OLD_TESTAMENT
-
-    TESTAMENTS = [OLD_TESTAMENT, NEW_TESTAMENT, APOCRYPHA].freeze
+    TESTAMENTS = {
+      apocrypha: 'Apocrypha',
+      new_testament: 'New Testament',
+      old_testament: 'Old Testament',
+    }.freeze
     private_constant :TESTAMENTS
 
     attr_reader :id # @return [Integer]
@@ -26,7 +21,8 @@ module BibleBot
     attr_reader :regex # @return [String]
     attr_reader :regex_matcher # @return [Regexp]
     attr_reader :chapters # @return [Array<Integer>]
-    attr_reader :testament # @return [String]
+    attr_reader :testament # @return [Symbol]
+    attr_reader :testament_name # @return [String]
 
     # Uses the same Regex pattern to match as we use in {Reference.parse}.
     # So this supports the same book name abbreviations.
@@ -60,7 +56,7 @@ module BibleBot
     end
 
     def initialize(id:, name:, abbreviation:, dbl_code:, regex:, testament:, chapters: [])
-      raise "Unknown testament: #{testament.inspect}" unless TESTAMENTS.include?(testament)
+      raise "Unknown testament: #{testament.inspect}" unless TESTAMENTS.key?(testament)
 
       @id = id
       @name = name
@@ -69,13 +65,14 @@ module BibleBot
       @regex = regex
       @chapters = chapters
       @testament = testament
+      @testament_name = TESTAMENTS[testament]
       @regex_matcher = Regexp.new('\b'+regex+'\b', Regexp::IGNORECASE).freeze
       @chapter_string_ids = nil
       @reference = nil
       @first_verse = nil
       @last_verse = nil
       @next_book = NULL
-      @apocryphal = testament == APOCRYPHA
+      @apocryphal = testament == :apocrypha
     end
 
     # Whether or not the book is one of the original 66
