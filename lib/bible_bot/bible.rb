@@ -708,7 +708,7 @@ module BibleBot
         dbl_code: "2MA",
         regex: "(?:(2|2nd|II|Second)\\s*(M|Ma|Mac|Macc|Maccabees))",
         testament: :apocrypha,
-        chapters: [36, 32, 40, 50, 27, 31, 42, 36, 29, 38, 38, 46, 26, 46, 39],
+        chapters: [36, 32, 40, 50, 27, 31, 42, 36, 29, 38, 38, 45, 26, 46, 39],
       ),
       Book.new(
         id: 113,
