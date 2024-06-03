@@ -609,7 +609,7 @@ module BibleBot
         dbl_code: "TOB",
         regex: "(?:(Tb|Tob|Tobit))",
         testament: :apocrypha,
-        chapters: [22, 14, 17, 21, 22, 18, 18, 21, 6, 13, 18, 22, 18, 15],
+        chapters: [22, 14, 17, 21, 22, 18, 18, 21, 6, 13, 19, 22, 18, 15],
       ),
       Book.new(
         id: 102,
