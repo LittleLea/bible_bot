@@ -80,6 +80,7 @@ describe BibleBot do
       {ref: "I Ma 1:1", expected: ["1 Maccabees 1:1"]},
       {ref: "1st Maccabees 1:1", expected: ["1 Maccabees 1:1"]},
       {ref: "First Maccabees 1:1", expected: ["1 Maccabees 1:1"]},
+      {ref: "One Maccabees 1:1", expected: ["1 Maccabees 1:1"]},
 
       {ref: "2 Maccabees 1:1", expected: ["2 Maccabees 1:1"]},
       {ref: "2 Mac 1:1", expected: ["2 Maccabees 1:1"]},
@@ -93,6 +94,7 @@ describe BibleBot do
       {ref: "II Ma 1:1", expected: ["2 Maccabees 1:1"]},
       {ref: "2nd Maccabees 1:1", expected: ["2 Maccabees 1:1"]},
       {ref: "Second Maccabees 1:1", expected: ["2 Maccabees 1:1"]},
+      {ref: "Two Maccabees 1:1", expected: ["2 Maccabees 1:1"]},
 
       {ref: "1 Esdras 1:1", expected: ["1 Esdras 1:1"]},
       {ref: "1 Esdr 1:1", expected: ["1 Esdras 1:1"]},
@@ -130,6 +132,7 @@ describe BibleBot do
       {ref: "III Ma 1:1", expected: ["3 Maccabees 1:1"]},
       {ref: "3rd Maccabees 1:1", expected: ["3 Maccabees 1:1"]},
       {ref: "Third Maccabees 1:1", expected: ["3 Maccabees 1:1"]},
+      {ref: "Three Maccabees 1:1", expected: ["3 Maccabees 1:1"]},
 
       {ref: "2 Esdras 1:1", expected: ["2 Esdras 1:1"]},
       {ref: "2 Esdr 1:1", expected: ["2 Esdras 1:1"]},
@@ -155,6 +158,7 @@ describe BibleBot do
       {ref: "IV Ma 1:1", expected: ["4 Maccabees 1:1"]},
       {ref: "4th Maccabees 1:1", expected: ["4 Maccabees 1:1"]},
       {ref: "Fourth Maccabees 1:1", expected: ["4 Maccabees 1:1"]},
+      {ref: "Four Maccabees 1:1", expected: ["4 Maccabees 1:1"]},
     ]
 
     test_cases.each do |t|
