@@ -8,10 +8,9 @@ module BibleBot
     THIRD = %w[3 3rd III Third].freeze
     FOURTH = %w[4 4th IV Fourth].freeze
 
-    FIRST_PREFIX = "(?:#{FIRST.join('|')})(?:\\s)?"
-    SECOND_PREFIX = "(?:#{SECOND.join('|')})(?:\\s)?"
-    THIRD_PREFIX = "(?:#{THIRD.join('|')})(?:\\s)?"
-    FOURTH_PREFIX = "(?:#{FOURTH.join('|')})(?:\\s)?"
+    FIRST_PREFIX, SECOND_PREFIX, THIRD_PREFIX, FOURTH_PREFIX = [FIRST, SECOND, THIRD, FOURTH].map do |prefixes|
+      "(?:#{prefixes.join('|')})(?:\\s)?"
+    end
 
     # "John" should not match the numbered John books (1 John, 2 John, 3 John)
     # Lookbehind regex statements have to be a fixed length. Since all of the prefix strings are
