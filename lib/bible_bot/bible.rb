@@ -3,10 +3,10 @@
 module BibleBot
   # Defines Books and Regular Expressions used for parsing and other logic in this gem.
   class Bible
-    FIRST = %w[1 1st I First].freeze
-    SECOND = %w[2 2nd II Second].freeze
-    THIRD = %w[3 3rd III Third].freeze
-    FOURTH = %w[4 4th IV Fourth].freeze
+    FIRST = %w[1 1st I First One].freeze
+    SECOND = %w[2 2nd II Second Two].freeze
+    THIRD = %w[3 3rd III Third Three].freeze
+    FOURTH = %w[4 4th IV Fourth Four].freeze
 
     FIRST_PREFIX, SECOND_PREFIX, THIRD_PREFIX, FOURTH_PREFIX = [FIRST, SECOND, THIRD, FOURTH].map do |prefixes|
       "(?:#{prefixes.join('|')})(?:\\s)?"
