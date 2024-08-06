@@ -48,6 +48,9 @@ module BibleBot
       # convert en dash & em dash to hyphens
       text = text.tr("\u2013\u2014", '--') 
 
+      # convert smart quotes to apostrophes, they cause an "invalid pattern in look-behind" error
+      text = text.tr('’', "'")
+
       # Compact consecutive spaces into 1.
       # This is necessary for negative lookup matchers, such as the one for "John".
       text.squeeze!(' ') 
