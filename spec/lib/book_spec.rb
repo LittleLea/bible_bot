@@ -29,6 +29,7 @@ describe BibleBot::Book do
       {name: "genesis", expected: "Genesis"},
       {name: "psalm", expected: "Psalms"},
       {name: "rev", expected: "Revelation"},
+      {name: "I’m Feeling", expected: nil},
       {name: "nothing", expected: nil},
     ].each do |t|
       context "name=#{t[:name]}" do

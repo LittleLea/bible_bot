@@ -33,6 +33,7 @@ module BibleBot
     #   Book.find_by_name("Genesis")
     def self.find_by_name(name)
       return nil if name.nil? || name.strip == ""
+      name = name.tr('’', "'")
 
       Bible.books.detect { |book| book.name.casecmp?(name) || book.regex_matcher.match?(name) }
     end
