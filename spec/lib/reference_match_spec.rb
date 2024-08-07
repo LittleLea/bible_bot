@@ -217,6 +217,7 @@ describe BibleBot::ReferenceMatch do
       {ref: "Genesis 13:11b-12", expected: ["Genesis 13:11-12"]},
       {ref: "Lamentations 5- Ezekiel 3", expected: ["Lamentations 5-Ezekiel 3"]},
       {ref: "Hosea 12- Joel 1", expected: ['Hosea 12-Joel 1']},
+      {ref: "I’m Feeling", expected: []},
     ]
 
     test_cases.each do |t|
