@@ -105,6 +105,22 @@ module BibleBot
       length == 1 && first.same_start_and_end_chapter?
     end
 
+    # Does the scripture span more than 1 bible book?
+    #
+    # @return [Boolean]
+    # @example
+    #  BibleBot::Reference.parse('Matthew 1:4-3:2').single_book?
+    #  #=> true
+    #
+    #  BibleBot::Reference.parse('Matthew 1:3 - John 2:1').single_book?
+    #  #=> false
+    #
+    #  BibleBot::Reference.parse('Matthew 1:3, John 2:1').single_book?
+    #  #=> false
+    def single_book?
+      length == 1 && first.same_start_and_end_book?
+    end
+
     # @return [Array<String>]
     # @example
     #   BibleBot::Reference.parse('Matthew 1-2, John 3-4').chapter_string_ids
