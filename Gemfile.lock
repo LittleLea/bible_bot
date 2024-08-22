@@ -7,6 +7,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.3)
+    concurrent-ruby (1.3.4)
     debug (1.9.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
@@ -27,6 +28,8 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    i18n (1.14.5)
+      concurrent-ruby (~> 1.0)
     io-console (0.7.2)
     irb (1.11.1)
       rdoc
@@ -77,6 +80,7 @@ DEPENDENCIES
   debug
   guard
   guard-rspec
+  i18n
   rspec (~> 3.5.0)
 
 BUNDLED WITH

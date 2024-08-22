@@ -7,8 +7,11 @@ require "bible_bot/verse"
 require "bible_bot/reference"
 require "bible_bot/reference_match"
 require "bible_bot/references"
+require "i18n"
 
 module BibleBot
+  I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
+
   DEFAULTS = {
     include_apocryphal_content: false
   }
