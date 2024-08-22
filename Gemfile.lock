@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     bible_bot (2.2.2)
+      i18n
 
 GEM
   remote: https://rubygems.org/
@@ -80,7 +81,6 @@ DEPENDENCIES
   debug
   guard
   guard-rspec
-  i18n
   rspec (~> 3.5.0)
 
 BUNDLED WITH
