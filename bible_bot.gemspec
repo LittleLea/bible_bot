@@ -20,4 +20,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = []
   spec.require_paths = ["lib"]
   spec.extra_rdoc_files = ['LICENSE', 'README.md']
+
+  spec.add_dependency 'i18n'
 end

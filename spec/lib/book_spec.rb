@@ -27,6 +27,7 @@ describe BibleBot::Book do
   describe "find_by_name" do
     [
       {name: "genesis", expected: "Genesis"},
+      {name: "gènesis", expected: "Genesis"},
       {name: "psalm", expected: "Psalms"},
       {name: "rev", expected: "Revelation"},
       {name: "I’m Feeling", expected: nil},

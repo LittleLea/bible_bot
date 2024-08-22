@@ -25,6 +25,7 @@ describe BibleBot::ReferenceMatch do
       {ref: "Genesis 3 - Genesis 4:3", expected: ["Genesis 3:1-4:3"]},
       {ref: "Ex", expected: []},
       {ref: "Genesis 1:1", expected: ["Genesis 1:1"]},
+      {ref: "Gènesis 1:1", expected: ["Genesis 1:1"]},
       {ref: "Ge 1:1", expected: ["Genesis 1:1"]},
       {ref: "Gen 1:1", expected: ["Genesis 1:1"]},
       {ref: "Gn 1:1", expected: ["Genesis 1:1"]},

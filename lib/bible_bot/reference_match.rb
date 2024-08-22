@@ -46,14 +46,17 @@ module BibleBot
     # @return [Array<ReferenceMatch>]
     def self.scan(text)
       # convert en dash & em dash to hyphens
-      text = text.tr("\u2013\u2014", '--') 
+      text = text.tr("\u2013\u2014", '--')
 
       # convert smart quotes to apostrophes, they cause an "invalid pattern in look-behind" error
       text = text.tr('’', "'")
 
+      # convert non-ASCII characters to their closest English equivalent
+      text = I18n.transliterate(text)
+
       # Compact consecutive spaces into 1.
       # This is necessary for negative lookup matchers, such as the one for "John".
-      text.squeeze!(' ') 
+      text.squeeze!(' ')
 
       scripture_reg = Bible.scripture_re
       Array.new.tap do |matches|
