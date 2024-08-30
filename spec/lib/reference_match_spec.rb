@@ -110,6 +110,7 @@ describe BibleBot::ReferenceMatch do
       {ref: "Prv 1:1", expected: ["Proverbs 1:1"]},
       {ref: "Pr 1:1", expected: ["Proverbs 1:1"]},
       {ref: "Ecclesiastes 1:1", expected: ["Ecclesiastes 1:1"]},
+      {ref: "Eccl 1:1", expected: ["Ecclesiastes 1:1"]},
       {ref: "Ecc 1:1", expected: ["Ecclesiastes 1:1"]},
       {ref: "Ec 1:1", expected: ["Ecclesiastes 1:1"]},
       {ref: "Eccle 1:1", expected: ["Ecclesiastes 1:1"]},

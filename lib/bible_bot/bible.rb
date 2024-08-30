@@ -210,7 +210,7 @@ module BibleBot
         name: "Ecclesiastes",
         abbreviation: "Eccl",
         dbl_code: "ECC",
-        regex: "Ec(?:clesiastes|cles|cle|c)?",
+        regex: "Ec(?:clesiastes|cles|cle|cl|c)?",
         testament: :old_testament,
         chapters: [18, 26, 22, 16, 20, 12, 29, 17, 18, 20, 10, 14]
       ),
