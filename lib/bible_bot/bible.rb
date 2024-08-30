@@ -408,7 +408,7 @@ module BibleBot
         name: "John",
         abbreviation: "John",
         dbl_code: "JHN",
-        regex: "#{JOHN_PREFIX}(?:John|Jn)",
+        regex: "#{JOHN_PREFIX}(?:John|Jhn|Jn)",
         testament: :new_testament,
         chapters: [51, 25, 36, 54, 47, 71, 53, 59, 41, 42, 57, 50, 38, 31, 27, 33, 26, 40, 42, 31, 25]
       ),
@@ -579,7 +579,7 @@ module BibleBot
         name: "1 John",
         abbreviation: "1John",
         dbl_code: "1JN",
-        regex: "#{FIRST_PREFIX}(?:John|Jn)",
+        regex: "#{FIRST_PREFIX}(?:John|Jhn|Jn)",
         testament: :new_testament,
         chapters: [10, 29, 24, 21, 21]
       ),
@@ -588,7 +588,7 @@ module BibleBot
         name: "2 John",
         abbreviation: "2John",
         dbl_code: "2JN",
-        regex: "#{SECOND_PREFIX}(?:John|Jn)",
+        regex: "#{SECOND_PREFIX}(?:John|Jhn|Jn)",
         testament: :new_testament,
         chapters: [13]
       ),
@@ -597,7 +597,7 @@ module BibleBot
         name: "3 John",
         abbreviation: "3John",
         dbl_code: "3JN",
-        regex: "#{THIRD_PREFIX}(?:John|Jn)",
+        regex: "#{THIRD_PREFIX}(?:John|Jhn|Jn)",
         testament: :new_testament,
         chapters: [15]
       ),
