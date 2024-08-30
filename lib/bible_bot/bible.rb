@@ -417,7 +417,7 @@ module BibleBot
         name: "Acts",
         abbreviation: "Acts",
         dbl_code: "ACT",
-        regex: "Acts",
+        regex: "(?:Acts|Ac)",
         testament: :new_testament,
         chapters: [26, 47, 26, 37, 42, 15, 60, 40, 43, 48, 30, 25, 52, 28, 41, 40, 34, 28, 41, 38, 40, 30, 35, 27, 27, 32, 44, 31]
       ),
@@ -489,7 +489,7 @@ module BibleBot
         name: "1 Thessalonians",
         abbreviation: "1Thess",
         dbl_code: "1TH",
-        regex: "#{FIRST_PREFIX}Thes(?:s)?(?:alonians)?",
+        regex: "#{FIRST_PREFIX}Th(?:es)?(?:s)?(?:alonians)?",
         testament: :new_testament,
         chapters: [10, 20, 13, 18, 28]
       ),
@@ -498,7 +498,7 @@ module BibleBot
         name: "2 Thessalonians",
         abbreviation: "2Thess",
         dbl_code: "2TH",
-        regex: "#{SECOND_PREFIX}Thes(?:s)?(?:alonians)?",
+        regex: "#{SECOND_PREFIX}Th(?:es)?(?:s)?(?:alonians)?",
         testament: :new_testament,
         chapters: [12, 17, 18]
       ),
