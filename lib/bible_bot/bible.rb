@@ -219,7 +219,7 @@ module BibleBot
         name: "Song of Solomon",
         abbreviation: "Song",
         dbl_code: "SNG",
-        regex: "Song(?: of )?(?:Solomon|Songs)?",
+        regex: "Songs?(?: of )?(?:Solomon|Songs)?",
         testament: :old_testament,
         chapters: [17, 17, 11, 16, 16, 13, 13, 14]
       ),

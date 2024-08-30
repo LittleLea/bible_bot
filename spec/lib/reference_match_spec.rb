@@ -117,6 +117,7 @@ describe BibleBot::ReferenceMatch do
       {ref: "Eccles 1:1", expected: ["Ecclesiastes 1:1"]},
       {ref: "Song of Solomon 1:1", expected: ["Song of Solomon 1:1"]},
       {ref: "Song of Songs 1:1", expected: ["Song of Solomon 1:1"]},
+      {ref: "Songs 1:1", expected: ["Song of Solomon 1:1"]},
       {ref: "Song 1:1", expected: ["Song of Solomon 1:1"]},
       {ref: "Isaiah 1:1", expected: ["Isaiah 1:1"]},
       {ref: "Isa 1:1", expected: ["Isaiah 1:1"]},
