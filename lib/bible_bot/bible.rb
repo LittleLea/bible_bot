@@ -534,7 +534,7 @@ module BibleBot
         name: "Philemon",
         abbreviation: "Philem",
         dbl_code: "PHM",
-        regex: "Philem(?:on)?",
+        regex: "(?:Philemon|Philem|Phlmn)",
         testament: :new_testament,
         chapters: [25]
       ),

@@ -194,6 +194,7 @@ describe BibleBot::ReferenceMatch do
       {ref: "Tit 1:1", expected: ["Titus 1:1"]},
       {ref: "Philemon 1:1", expected: ["Philemon 1:1"]},
       {ref: "Philem 1:1", expected: ["Philemon 1:1"]},
+      {ref: "Phlmn 1:1", expected: ["Philemon 1:1"]},
       {ref: "Hebrews 1:1", expected: ["Hebrews 1:1"]},
       {ref: "Heb 1:1", expected: ["Hebrews 1:1"]},
       {ref: "James 1:1", expected: ["James 1:1"]},
