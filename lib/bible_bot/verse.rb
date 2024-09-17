@@ -10,7 +10,7 @@ module BibleBot
     # Turns an Integer into a Verse
     # For more details, see note above the `id` method.
     #
-    # @param id [Integer]
+    # @param id [Integer, String]
     # @return [Verse]
     # @example
     #   Verse.from_id(19_105_001) #=> <Verse book="Psalms" chapter_number=105 verse_number=1>
@@ -30,7 +30,7 @@ module BibleBot
     # @param book_id [Integer]
     # @param chapter_number [Integer]
     # @param verse_number [Integer]
-    # @return [Array<Integer>]
+    # @return [Integer]
     def self.integer_id(book_id:, chapter_number:, verse_number:)
       "#{book_id}#{chapter_number.to_s.rjust(3, '0')}#{verse_number.to_s.rjust(3, '0')}".to_i
     end
