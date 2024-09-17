@@ -1,15 +1,15 @@
 module BibleBot
   # A Reference represents a range of verses.
   class Reference
-    attr_reader :start_verse # @return [Verse]
-    attr_reader :end_verse # @return [Verse]
+    attr_reader :start_verse # @return [BibleBot::Verse]
+    attr_reader :end_verse # @return [BibleBot::Verse]
 
-    # Initialize a {Reference} from {Verse} IDs. If no end_verse_id is provided, it will
+    # Initialize a {BibleBot::Reference} from {BibleBot::Verse} IDs. If no end_verse_id is provided, it will
     # set end_verse to equal start_verse.
     #
     # @param start_verse_id [Integer]
     # @param end_verse_id [Integer]
-    # @return [Reference]
+    # @return [BibleBot::Reference]
     # @example
     #   BibleBot::Reference.from_verse_ids(1001001, 1001010) #=> (Gen 1:1-10)
     def self.from_verse_ids(start_verse_id, end_verse_id=nil)
@@ -26,7 +26,7 @@ module BibleBot
     #   * true - Skip invalid references (default)
     #   * false - Include invalid references
     #   * :raise_errors - Raise error if any references are invalid
-    # @return [References<Reference>]
+    # @return [BibleBot::References<BibleBot::Reference>]
     def self.parse(text, validate: true)
       references = if text.nil? || text.strip == ""
         []
@@ -64,8 +64,8 @@ module BibleBot
       self.parse(text).chapters.map(&:formatted)
     end
 
-    # @param start_verse [Verse]
-    # @param end_verse [Verse] Defaults to start_verse if no end_verse is provided
+    # @param start_verse [BibleBot::Verse]
+    # @param end_verse [BibleBot::Verse] Defaults to start_verse if no end_verse is provided
     def initialize(start_verse:, end_verse: nil)
       @start_verse = start_verse
       @end_verse   = end_verse || start_verse
@@ -81,7 +81,7 @@ module BibleBot
       end_verse.book.apocryphal?
     end
 
-    # Returns a formatted string of the {Reference}.
+    # Returns a formatted string of the {BibleBot::Reference}.
     #
     # @return [String]
     # @example
@@ -123,9 +123,9 @@ module BibleBot
       "BibleBot::Reference — #{formatted}"
     end
 
-    # Returns true if the given verse is within the start and end verse of the Reference.
+    # Returns true if the given verse is within the start and end verse of the BibleBot::Reference.
     #
-    # @param verse [Verse]
+    # @param verse [BibleBot::Verse]
     # @return [Boolean]
     def includes_verse?(verse)
       return false unless verse.is_a?(Verse)
@@ -134,7 +134,7 @@ module BibleBot
     end
 
     # Return true if the two references contain any of the same verses.
-    # @param other [Reference]
+    # @param other [BibleBot::Reference]
     # @return [Boolean]
     def intersects_reference?(other)
       return false unless other.is_a?(Reference)
@@ -142,9 +142,9 @@ module BibleBot
       start_verse <= other.end_verse && end_verse >= other.start_verse
     end
 
-    # Returns an array of all the verses contained in the Reference.
+    # Returns an array of all the verses contained in the BibleBot::Reference.
     #
-    # @return [Array<Verse>]
+    # @return [Array<BibleBot::Verse>]
     def verses
       return @verses if @verses
 

@@ -3,7 +3,7 @@ module BibleBot
   class Verse
     include Comparable
 
-    attr_reader :book # @return [Book]
+    attr_reader :book # @return [BibleBot::Book]
     attr_reader :chapter_number # @return [Integer]
     attr_reader :verse_number # @return [Integer]
 
@@ -11,9 +11,9 @@ module BibleBot
     # For more details, see note above the `id` method.
     #
     # @param id [Integer, String]
-    # @return [Verse]
+    # @return [BibleBot::Verse]
     # @example
-    #   Verse.from_id(19_105_001) #=> <Verse book="Psalms" chapter_number=105 verse_number=1>
+    #   BibleBot::Verse.from_id(19_105_001) #=> <BibleBot::Verse book="Psalms" chapter_number=105 verse_number=1>
     def self.from_id(id)
       return from_string_id(id) if id.is_a?(String)
       return nil if id.nil?
@@ -35,7 +35,7 @@ module BibleBot
       "#{book_id}#{chapter_number.to_s.rjust(3, '0')}#{verse_number.to_s.rjust(3, '0')}".to_i
     end
 
-    # @param book [Book]
+    # @param book [BibleBot::Book]
     # @param chapter_number [Integer]
     # @param verse_number [Integer]
     def initialize(book:, chapter_number:,  verse_number:)
@@ -71,7 +71,7 @@ module BibleBot
 
     # The Comparable mixin uses this to define all the other comparable methods
     #
-    # @param other [Verse]
+    # @param other [BibleBot::Verse]
     # @return [Integer] Either -1, 0, or 1
     #   * -1: this verse is less than the other verse
     #   * 0: this verse is equal to the other verse
@@ -101,7 +101,7 @@ module BibleBot
     # until it gets to the last verse in the bible,
     # at which point it will return nil.
     #
-    # @return [Verse, nil]
+    # @return [BibleBot::Verse, nil]
     def next_verse
       return Verse.new(book: book, chapter_number: chapter_number, verse_number: verse_number + 1) unless last_verse_in_chapter?
       return Verse.new(book: book, chapter_number: chapter_number + 1, verse_number: 1) unless last_chapter_in_book?
@@ -145,7 +145,7 @@ module BibleBot
     # This gets called by {from_id} to allow it to be backwards compatible for a while.
     # @deprecated Use {from_id} instead.
     # @param verse_id [String] ex: "genesis-001-001"
-    # @return [Verse] ex: <Verse book="Genesis" chapter_number=1 verse_number=1>
+    # @return [BibleBot::Verse] ex: <BibleBot::Verse book="Genesis" chapter_number=1 verse_number=1>
     def self.from_string_id(string_id)
       parts = string_id.split( '-' )
 

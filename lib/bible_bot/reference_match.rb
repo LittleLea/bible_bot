@@ -25,7 +25,7 @@ module BibleBot
   # * {#offset}
   #
   # @example
-  #   matches = ReferenceMatch.scan("Mark 1:5 and another Romans 4:1")
+  #   matches = BibleBot::ReferenceMatch.scan("Mark 1:5 and another Romans 4:1")
   #   matches[0].match[0]   #=> "Mark 1:5"
   #   matches[0].offset     #=> 0
   #   matches[0].length     #=> 8
@@ -43,7 +43,7 @@ module BibleBot
     # Note: Does not validate References.
     #
     # @param text [String]
-    # @return [Array<ReferenceMatch>]
+    # @return [Array<BibleBot::ReferenceMatch>]
     def self.scan(text)
       # convert en dash & em dash to hyphens
       text = text.tr("\u2013\u2014", '--')
@@ -64,7 +64,7 @@ module BibleBot
       end
     end
 
-    # @return [Reference] Note: Reference is not yet validated
+    # @return [BibleBot::Reference] Note: Reference is not yet validated
     def reference
       @reference ||= Reference.new(
         start_verse: Verse.new(book: start_book, chapter_number: start_chapter.to_i, verse_number: start_verse.to_i),
@@ -95,13 +95,13 @@ module BibleBot
       @v2 = match[:EndVerseNumber]
     end
 
-    # @return [Book]
+    # @return [BibleBot::Book]
     def start_book
       # There will always be a starting book.
       Book.find_by_name(@b1)
     end
 
-    # @return [Book]
+    # @return [BibleBot::Book]
     def end_book
       # The end book is optional. If not provided, default to starting book.
       Book.find_by_name(@b2) || start_book

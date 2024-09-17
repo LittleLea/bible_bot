@@ -2,7 +2,7 @@
 
 module BibleBot
   # Represents one of the 66 books in the bible (Genesis - Revelation) or Apocryphal books.
-  # You should never need to initialize a Book, they are initialized in {Bible}.
+  # You should never need to initialize a BibleBot::Book, they are initialized in {BibleBot::Bible}.
   class Book
     NULL = Object.new.freeze
     private_constant :NULL
@@ -24,13 +24,13 @@ module BibleBot
     attr_reader :testament # @return [Symbol]
     attr_reader :testament_name # @return [String]
 
-    # Uses the same Regex pattern to match as we use in {Reference.parse}.
+    # Uses the same Regex pattern to match as we use in {BibleBot::Reference.parse}.
     # So this supports the same book name abbreviations.
     #
     # @param name [String]
-    # @return [Book]
+    # @return [BibleBot::Book]
     # @example
-    #   Book.find_by_name("Genesis")
+    #   BibleBot::Book.find_by_name("Genesis")
     def self.find_by_name(name)
       return nil if name.nil? || name.strip == ""
       name = name.tr('’', "'")
@@ -39,20 +39,20 @@ module BibleBot
       Bible.books.detect { |book| book.name.casecmp?(name) || book.regex_matcher.match?(name) }
     end
 
-    # Find by the DBL Code defined in {Bible}.
+    # Find by the DBL Code defined in {BibleBot::Bible}.
     #
     # @param code [String]
-    # @return [Book]
+    # @return [BibleBot::Book]
     def self.find_by_dbl_code(code)
       return nil if code.nil? || code.empty?
 
       Bible.books.detect { |book| book.dbl_code == code }
     end
 
-    # Find by the Book ID defined in {Bible}.
+    # Find by the BibleBot::Book ID defined in {BibleBot::Bible}.
     #
     # @param id [Integer]
-    # @return [Book]
+    # @return [BibleBot::Book]
     def self.find_by_id(id)
       Bible.books.find { |book| book.id == id }
     end
@@ -100,7 +100,7 @@ module BibleBot
     end
 
     # A reference containing the entire book
-    # @return [Reference]
+    # @return [BibleBot::Reference]
     def reference
       @reference ||= Reference.new(start_verse: start_verse, end_verse: end_verse)
     end
@@ -125,21 +125,21 @@ module BibleBot
       end
     end
 
-    # @return [Verse]
+    # @return [BibleBot::Verse]
     def start_verse
       @first_verse ||= Verse.from_id(
         verse_id(chapter_number: 1, verse_number: 1)
       )
     end
 
-    # @return [Verse]
+    # @return [BibleBot::Verse]
     def end_verse
       @last_verse ||= Verse.from_id(
         verse_id(chapter_number: chapters.length, verse_number: chapters.last)
       )
     end
 
-    # @return [Book, nil]
+    # @return [BibleBot::Book, nil]
     def next_book
       return @next_book unless @next_book == NULL
       @next_book = Book.find_by_id(id + 1)
