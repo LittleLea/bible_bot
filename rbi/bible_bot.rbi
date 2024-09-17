@@ -3,7 +3,7 @@
 module BibleBot
   class << self
 
-    sig { returns(include: T::Boolean) }
+    sig { returns(T::Boolean) }
     def include_apocryphal_content?; end
 
     sig { params(include: T::Boolean).void }
