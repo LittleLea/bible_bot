@@ -83,7 +83,7 @@ class BibleBot::Verse
   include Comparable
 
   class << self
-    sig { params(id: T.nilable(T.any(Integer, String)).returns(T.nilable(BibleBot::Verse)) }
+    sig { params(id: T.nilable(T.any(Integer, String))).returns(T.nilable(BibleBot::Verse)) }
     def from_id(id); end
 
     sig { params(book_id: Integer, chapter_number: Integer, verse_number: Integer).returns(Integer) }
