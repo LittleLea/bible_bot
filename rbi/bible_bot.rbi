@@ -206,7 +206,7 @@ class BibleBot::References
   def single_chapter?; end
 
   sig { returns(T::Boolean) }
-  def single_booko?; end
+  def single_book?; end
   
   sig { returns(T::Array[String]) }
   def chapter_string_ids; end
