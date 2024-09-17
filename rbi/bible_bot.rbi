@@ -135,7 +135,7 @@ class BibleBot::Reference
     sig { params(text: T.nilable(String), validate: T::Boolean).returns(BibleBot::References) }
     def parse(text, validate: false); end
 
-    sig { params(text: T.nilable(String)).returns(String) }
+    sig { params(text: T.nilable(String)).returns(T.nilable(String)) }
     def normalize(text); end
 
     sig { params(text: T.nilable(String)).returns(T::Array[String]) }
