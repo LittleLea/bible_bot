@@ -142,10 +142,10 @@ class BibleBot::Reference
     def normalize_by_chapter(text); end
   end
 
-  sig { returns(T::Verse) }
+  sig { returns(BibleBot::Verse) }
   def start_verse; end
 
-  sig { returns(T::Verse) }
+  sig { returns(BibleBot::Verse) }
   def end_verse; end
 
   sig { returns(T::Boolean) }
