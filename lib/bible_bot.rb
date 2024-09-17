@@ -38,8 +38,8 @@ module BibleBot
     !!self.options.include_apocryphal_content
   end
 
-  def self.include_apocryphal_content=(inc)
-    self.options.include_apocryphal_content = (inc == true)
+  def self.include_apocryphal_content=(include)
+    self.options.include_apocryphal_content = (include == true)
 
     # We need to reset the stored regexps because they take content into account.
     BibleBot::Bible.reset_regular_expressions

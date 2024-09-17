@@ -30,7 +30,7 @@ module BibleBot
     # @param book_id [Integer]
     # @param chapter_number [Integer]
     # @param verse_number [Integer]
-    # @return [Array<Integer>]
+    # @return [Integer]
     def self.integer_id(book_id:, chapter_number:, verse_number:)
       "#{book_id}#{chapter_number.to_s.rjust(3, '0')}#{verse_number.to_s.rjust(3, '0')}".to_i
     end

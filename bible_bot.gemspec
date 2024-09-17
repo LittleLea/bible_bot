@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 3.1'
 
-  spec.files         = Dir.glob('{lib}/**/*', File::FNM_DOTMATCH)
+  spec.files         = Dir.glob('{lib,rbi}/**/*', File::FNM_DOTMATCH)
   spec.bindir        = 'exe'
   spec.executables   = []
   spec.test_files    = []
