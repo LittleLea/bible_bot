@@ -118,7 +118,7 @@ class BibleBot::Verse
   def last_verse_in_chapter?; end
 
   sig { returns(T::Boolean) }
-  def last_verse_in_book?; end
+  def last_chapter_in_book?; end
 
   sig { returns(T::Boolean) }
   def valid?; end
