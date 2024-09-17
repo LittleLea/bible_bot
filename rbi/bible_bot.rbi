@@ -132,13 +132,13 @@ class BibleBot::Reference
     sig { params(start_verse_id: Integer, end_verse_id: T.nilable(Integer)).returns(BibleBot::Reference) }
     def from_verse_ids(start_verse_id, end_verse_id = nil); end
 
-    sig { params(text: String, validate: T::Boolean).returns(BibleBot::References) }
+    sig { params(text: T.nilable(String), validate: T::Boolean).returns(BibleBot::References) }
     def parse(text, validate: false); end
 
-    sig { params(text: String).returns(String) }
+    sig { params(text: T.nilable(String)).returns(String) }
     def normalize(text); end
 
-    sig { params(text: String).returns(T::Array[String]) }
+    sig { params(text: T.nilable(String)).returns(T::Array[String]) }
     def normalize_by_chapter(text); end
   end
 
