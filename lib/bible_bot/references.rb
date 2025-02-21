@@ -112,13 +112,16 @@ module BibleBot
     #  BibleBot::Reference.parse('Matthew 1:4-3:2').single_book?
     #  #=> true
     #
+    #  BibleBot::Reference.parse('Matthew 1:4; Matthew 3:2').single_book?
+    #  #=> true
+    #
     #  BibleBot::Reference.parse('Matthew 1:3 - John 2:1').single_book?
     #  #=> false
     #
     #  BibleBot::Reference.parse('Matthew 1:3, John 2:1').single_book?
     #  #=> false
     def single_book?
-      length == 1 && first.same_start_and_end_book?
+      flat_map { |r| [r.start_verse.book.id, r.end_verse.book.id ] }.uniq.size == 1
     end
 
     # @return [Array<String>]

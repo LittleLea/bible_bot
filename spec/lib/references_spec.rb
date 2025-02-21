@@ -108,6 +108,11 @@ describe BibleBot::References do
 
     it { is_expected.to eq(true) }
 
+    context 'when empty' do
+      let(:reference_string) { '' }
+      it { is_expected.to eq(false) }
+    end
+
     context 'when verbose full chapter' do
       let(:reference_string) { 'Matthew 1:1-25' }
       it { is_expected.to eq(true) }
@@ -115,6 +120,11 @@ describe BibleBot::References do
 
     context 'when multiple chapters' do
       let(:reference_string) { 'Matthew 1-2' }
+      it { is_expected.to eq(true) }
+    end
+
+    context 'when multiple non-contiguous chapters' do
+      let(:reference_string) { 'Matthew 1; Matthew 3' }
       it { is_expected.to eq(true) }
     end
 
