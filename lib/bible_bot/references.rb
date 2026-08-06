@@ -28,6 +28,13 @@ module BibleBot
       map(&:formatted).join('; ') unless empty?
     end
 
+    # Returns a formatted string of the references
+    #
+    # @return [String]
+    def to_s
+      formatted || ''
+    end
+
     # Returns a boolean if any of the references contain an apocryphal book
     #
     # @return [Boolean]
