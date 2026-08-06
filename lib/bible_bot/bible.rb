@@ -552,7 +552,7 @@ module BibleBot
         name: "James",
         abbreviation: "Jas",
         dbl_code: "JAS",
-        regex: "Ja(?:me)?s",
+        regex: "(?:Jm|Ja(?:me)?s)",
         testament: :new_testament,
         chapters: [27, 26, 18, 17, 20]
       ),

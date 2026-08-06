@@ -202,6 +202,7 @@ describe BibleBot::ReferenceMatch do
       {ref: "Heb 1:1", expected: ["Hebrews 1:1"]},
       {ref: "James 1:1", expected: ["James 1:1"]},
       {ref: "Jas 1:1", expected: ["James 1:1"]},
+      {ref: "Jm 1:1", expected: ["James 1:1"]},
       {ref: "1 Peter 1:1", expected: ["1 Peter 1:1"]},
       {ref: "1 Pet 1:1", expected: ["1 Peter 1:1"]},
       {ref: "2 Peter 1:1", expected: ["2 Peter 1:1"]},
