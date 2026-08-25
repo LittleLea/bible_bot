@@ -1,4 +1,3 @@
-require "ostruct"
 require "bible_bot/version"
 require "bible_bot/book"
 require "bible_bot/bible"
@@ -16,8 +15,10 @@ module BibleBot
     include_apocryphal_content: false
   }
 
+  Options = Struct.new(*DEFAULTS.keys)
+
   def self.options
-    @options ||= OpenStruct.new(DEFAULTS.dup)
+    @options ||= Options.new(**DEFAULTS.dup)
   end
 
   def self.options=(opts)
