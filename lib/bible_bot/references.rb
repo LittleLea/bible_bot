@@ -148,5 +148,10 @@ module BibleBot
       end
     end
 
+    # Quantity of verses in the reference
+    # @return [Integer]
+    def verse_count
+      sum(&:verse_count)
+    end
   end
 end

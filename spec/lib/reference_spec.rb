@@ -64,6 +64,12 @@ describe BibleBot::Reference do
     end
   end
 
+  describe 'verse_count' do
+    it 'returns the verse count' do
+      expect(described_class.verse_count('Ps  1; Gen 1:4-2:6')).to eq(40)
+    end
+  end
+
   describe "formatted" do
     [
       [1_001_001, nil, "Genesis 1:1"],

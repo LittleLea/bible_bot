@@ -64,6 +64,17 @@ module BibleBot
       self.parse(text).chapters.map(&:formatted)
     end
 
+    # Returns the quantity of verses for the given scripture references.
+    #
+    # @param text [String] ex: ' Ps  1; Gen 1:4-2:6'
+    # @return [Integer]
+    # @example
+    #   BibleBot::Reference.verse_count(' Ps  1; Gen 1:4-2:6')
+    #   #=> 40
+    def self.verse_count(references)
+      parse(references, validate: :raise_error).verse_count
+    end
+
     # @param start_verse [BibleBot::Verse]
     # @param end_verse [BibleBot::Verse] Defaults to start_verse if no end_verse is provided
     def initialize(start_verse:, end_verse: nil)
@@ -160,6 +171,13 @@ module BibleBot
       end
 
       @verses
+    end
+
+    # Returns the quantity of verses in the scripture reference
+    #
+    # @return [Integer]
+    def verse_count
+      verses.size
     end
 
     # @return [Hash]
